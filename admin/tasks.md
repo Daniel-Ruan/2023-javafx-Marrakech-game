@@ -5,7 +5,7 @@ Use the entries below as an example.
 
 ## Week 4
 
-Everyone: create application skeleton - meeting 17:00 24 August
+Everyone: create application skeleton - meeting 17:00 24 August.
 
 ## Week 5
 
@@ -30,3 +30,4 @@ Kechun Ma: Task 6 refillFactories - 25 Mar (depends on Task 5)
 ## Week 10
 
 ## Week 11
+# push test
