@@ -49,7 +49,6 @@ declaration: >-
 
 # Sign *your* name and uids here. (Remove entries if you have fewer
 # than three members.)
-# test
 signatures:
   - name: Huizhe Ruan
     uid: u7723366

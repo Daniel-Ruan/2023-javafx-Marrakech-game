@@ -9,11 +9,7 @@ Everyone: create application skeleton - meeting 17:00 24 August.
 
 ## Week 5
 
-Huizhe Ruan: Task 3 isPlayerStateWellFormed - 23 Mar
-
-Anbo Wu: Task 5 drawTileFromBag - 23 Mar
-
-Kechun Ma: Task 6 refillFactories - 25 Mar (depends on Task 5)
+...
 
 ## Week 6
 
