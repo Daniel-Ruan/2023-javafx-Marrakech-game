@@ -6,4 +6,4 @@ public class B {
         return super.toString();
     }
 }
-//test
+//tests
