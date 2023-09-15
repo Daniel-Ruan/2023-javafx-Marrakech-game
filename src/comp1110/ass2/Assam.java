@@ -36,6 +36,19 @@ public class Assam {
     }
 
     /**
+     * Constructs a new Assam from a string representation.
+     *
+     * @param str the string representation of Assam
+     * @return a new Assam object
+     */
+    public static Assam fromString(String str) {
+        int x = Character.getNumericValue(str.charAt(1));
+        int y = Character.getNumericValue(str.charAt(2));
+        char orientation = str.charAt(3);
+        return new Assam(new IntPair(x, y), orientation);
+    }
+
+    /**
      * Returns a string representation of Assam according to the given format.
      *
      * @return the Assam string

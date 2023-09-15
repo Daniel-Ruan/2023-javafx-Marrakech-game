@@ -38,6 +38,14 @@ public class IntPair {
         return y;
     }
 
+    /**
+     * Checks if the coordinates represented by this IntPair are within a 7x7 board.
+     * @return true if the coordinates are within the board, false otherwise.
+     */
+    public boolean isValidForBoard() {
+        return x >= 0 && x < 7 && y >= 0 && y < 7;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

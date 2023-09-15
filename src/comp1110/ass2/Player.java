@@ -1,9 +1,9 @@
     package comp1110.ass2;
 
-    public class Player{
+    public class Player {
         // Player's color ('c', 'y', 'r', 'p')
         private final char color;
-    
+
         // Amount of dirhams the player possesses (0-999)
         private int dirhams;
 
@@ -16,9 +16,9 @@
         /**
          * Constructs a new Player with the given parameters.
          *
-         * @param color the color of the player
-         * @param dirhams the initial amount of dirhams
-         * @param rugs the initial number of rugs
+         * @param color    the color of the player
+         * @param dirhams  the initial amount of dirhams
+         * @param rugs     the initial number of rugs
          * @param isActive the initial state of the player (active or not)
          */
         public Player(char color, int dirhams, int rugs, boolean isActive) {
@@ -58,6 +58,30 @@
         }
 
         /**
+         * Constructs a new Player from a string representation.
+         *
+         * @param str the string representation of the player
+         * @return a new Player object
+         */
+        public static Player fromString(String str) {
+            char color = str.charAt(1);
+            int dirhams = Integer.parseInt(str.substring(2, 5));
+            int rugs = Integer.parseInt(str.substring(5, 7));
+            boolean isActive = (str.charAt(7) == 'i');
+            return new Player(color, dirhams, rugs, isActive);
+        }
+
+        /**
+         * Check if a given character is a valid color.
+         *
+         * @param color the color character to check
+         * @return true if the color is valid, false otherwise
+         */
+        public static boolean isValidColor(char color) {
+            return color == 'c' || color == 'y' || color == 'r' || color == 'p';
+        }
+
+        /**
          * Returns a string representation of the player according to the given format.
          *
          * @return the player string
@@ -65,6 +89,4 @@
         public String toPlayerString() {
             return String.format("P%c%03d%02d%c", color, dirhams, rugs, isActive ? 'i' : 'o');
         }
-
-        // Other methods
     }
