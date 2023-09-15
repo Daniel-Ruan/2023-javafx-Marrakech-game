@@ -23,8 +23,50 @@ public class Marrakech {
      * @return true if the rug is valid, and false otherwise.
      */
     public static boolean isRugValid(String gameString, String rug) {
+        if (rug.length() != 7) return false;
+        char color = rug.charAt(0);
+        if (!Player.isValidColor(color)) return false;
+
+        String idStr = rug.substring(1, 3);
+
+        if (!idStr.matches("\\d{2}")) {
+            return false;
+        }
+
+        String coordinates = rug.substring(3);
+        int x1 = Character.getNumericValue(coordinates.charAt(0));
+        int y1 = Character.getNumericValue(coordinates.charAt(1));
+        int x2 = Character.getNumericValue(coordinates.charAt(2));
+        int y2 = Character.getNumericValue(coordinates.charAt(3));
+
+        IntPair pair1 = new IntPair(x1, y1);
+        IntPair pair2 = new IntPair(x2, y2);
+
+        if (!pair1.isValidForBoard() || !pair2.isValidForBoard()) {
+            return false;
+        }
+
+        String boardString = Board.extractBoardPart(gameString);
+
+        String rugString = rug.substring(0, 3);
+
+        // 将boardString分割成每个格子的字符串数组
+        int cellCount = boardString.length() / 3;
+        String[] cells = new String[cellCount];
+        for (int i = 0; i < cellCount; i++) {
+            cells[i] = boardString.substring(i * 3, i * 3 + 3);
+        }
+
+// 遍历数组，检查是否有与rugString匹配的格子
+        for (String cell : cells) {
+            if (cell.equals(rugString)) {
+                return false;
+            }
+        }
+
+        return true;
+
         // FIXME: Task 4
-        return false;
     }
 
     /**
