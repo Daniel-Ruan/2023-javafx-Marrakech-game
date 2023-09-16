@@ -25,7 +25,7 @@ public class Board {
         if (isValidPosition(position)) {
             return board[position.getX()][position.getY()];
         } else {
-            return null; // 处理越界查询
+            return null; // 处理越界查询 test
         }
     }
 
