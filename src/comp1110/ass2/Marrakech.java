@@ -57,7 +57,7 @@ public class Marrakech {
             cells[i] = boardString.substring(i * 3, i * 3 + 3);
         }
 
-        // 遍历数组，检查是否有与rugString匹配的格子 test
+        // 遍历数组，检查是否有与rugString匹配的格子
         for (String cell : cells) {
             if (cell.equals(rugString)) {
                 return false;
