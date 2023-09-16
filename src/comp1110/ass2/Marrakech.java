@@ -84,8 +84,10 @@ public class Marrakech {
      * @return The result of the roll of the die meeting the criteria above
      */
     public static int rollDie() {
+        SpecialDie specialDie = new SpecialDie();
+        return specialDie.roll();
         // FIXME: Task 6
-        return -1;
+
     }
 
     /**
