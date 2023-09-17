@@ -241,7 +241,7 @@ public class Viewer extends Application {
                 playerCircle.setCenterY(playerInfoStartY + i * playerInfoGap);  // 设置圆心的Y坐标
 
                 // 创建一个标签来显示玩家的其他信息（如dirhams数量、剩余的rugs等）
-                Label playerInfo = new Label("Dirhams: " + currentPlayer.getDirhams() + ", Rugs: " + currentPlayer.getRugs());
+                Label playerInfo = new Label("Dirhams: " + currentPlayer.getDirhams() + ", Rugs: " + currentPlayer.getRugs() + ", Player States: " + currentPlayer.getPlayerStates()) ;
                 playerInfo.setLayoutX(boardRightEdge + 70);  // 标签的X坐标
                 playerInfo.setLayoutY(playerInfoStartY + i * playerInfoGap - 10);  // 标签的Y坐标（微调以使其与圆形对齐）
 

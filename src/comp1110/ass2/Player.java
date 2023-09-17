@@ -13,6 +13,8 @@
         // Indicates if the player is active or out of the game
         private boolean isActive;
 
+        private String PlayerStates;
+
         /**
          * Constructs a new Player with the given parameters.
          *
@@ -36,6 +38,10 @@
         public int getDirhams() {
             return dirhams;
         }
+
+        public String getPlayerStates(){
+            if(isActive) return "in the game";
+        else return "out of the game";}
 
         public void setDirhams(int dirhams) {
             this.dirhams = dirhams;
