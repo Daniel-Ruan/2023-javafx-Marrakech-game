@@ -13,6 +13,18 @@ public class Board {
         }
     }
 
+    public void populateBoardFromString(String boardString) {
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
+                int index = 3 * (row * BOARD_SIZE + col);
+                String cellString = boardString.substring(index, index + 3);
+                char colorChar = cellString.charAt(0);
+                int rugID = Integer.parseInt(cellString.substring(1, 3));
+                board[row][col].setRug(colorChar, rugID);
+            }
+        }
+    }
+
     public void placeRug(IntPair position, char color, int rugID) {
         if (isValidPosition(position)) {
             board[position.getX()][position.getY()].setRug(color, rugID);

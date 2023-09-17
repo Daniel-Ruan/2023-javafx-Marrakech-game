@@ -72,6 +72,21 @@
         }
 
         /**
+         * Extracts the information for all players from the given game state string.
+         *
+         * @param state The game state string.
+         * @return An array containing the information for all players.
+         */
+        public static String[] extractPlayerInfo(String state) {
+            String[] playerInfo = new String[4];  // 假设有4个玩家
+            for (int i = 0; i < 4; i++) {  // 有4个玩家
+                String playerString = state.substring(i * 8, (i + 1) * 8);
+                playerInfo[i] = playerString;  // .substring(1)
+            }
+            return playerInfo;
+        }
+
+        /**
          * Check if a given character is a valid color.
          *
          * @param color the color character to check
