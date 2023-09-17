@@ -48,6 +48,17 @@ public class Assam {
         return new Assam(new IntPair(x, y), orientation);
     }
 
+    public static String getContentBetweenAandB(String input) {
+        int indexA = input.indexOf('A');
+        int indexB = input.indexOf('B');
+
+        if (indexA == -1 || indexB == -1 || indexA >= indexB) {
+            return "";  // 如果找不到'A'或'B'，或者'A'在'B'之后，返回""
+        }
+
+        return input.substring(indexA + 1, indexB);
+    }
+
     /**
      * Returns a string representation of Assam according to the given format.
      *
