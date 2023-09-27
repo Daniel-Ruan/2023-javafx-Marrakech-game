@@ -23,6 +23,8 @@
          * @param rugs     the initial number of rugs
          * @param isActive the initial state of the player (active or not)
          */
+
+        //create a constructor which is designed to create an object of class 'Player'
         public Player(char color, int dirhams, int rugs, boolean isActive) {
             this.color = color;
             this.dirhams = dirhams;
@@ -30,7 +32,7 @@
             this.isActive = isActive;
         }
 
-        // Getter and setter methods
+        //create a bunch of Get and set methods
         public char getColor() {
             return color;
         }
@@ -70,11 +72,18 @@
          * @return a new Player object
          */
         public static Player fromString(String str) {
+            //this method is to accept a string argument 'str' which includes info of players.
             char color = str.charAt(1);
+            //charAt() method is to obtain the character with index 1 in the string, which represents color.
             int dirhams = Integer.parseInt(str.substring(2, 5));
+            //substring() method is to obtain substrings with indices 2 to 4 in the string.
+            //Integer.parseInt() method is to transfer the string into an integer, which to calculate currency.
             int rugs = Integer.parseInt(str.substring(5, 7));
+            //the logic is the same as above.
             boolean isActive = (str.charAt(7) == 'i');
+            //obtain the character with index 7 in the string, if the string is 'i', then player is active.
             return new Player(color, dirhams, rugs, isActive);
+            //create a new object 'Player', use the info before to initiate the game condition.
         }
 
         /**
@@ -84,11 +93,16 @@
          * @return An array containing the information for all players.
          */
         public static String[] extractPlayerInfo(String state) {
-            String[] playerInfo = new String[4];  // 假设有4个玩家
+            //this method is to accept a string argument 'state' which stores info of players.
+            String[] playerInfo = new String[4];
+            // the length of array is 4 for we assumed there are 4 players.
             for (int i = 0; i < 4; i++) {  // 有4个玩家
                 String playerString = state.substring(i * 8, (i + 1) * 8);
-                playerInfo[i] = playerString;  // .substring(1)
+                //the length of char for each player is 8.
+                playerInfo[i] = playerString;
+                //Store the extracted player info in the i-th position of the playerInfo array.
             }
+            //now the playerInfo array contains 4 players info extracted from the input string state.
             return playerInfo;
         }
 
@@ -108,6 +122,14 @@
          * @return the player string
          */
         public String toPlayerString() {
+            //This method has no parameters and is used to format the attributes of the player object into a string.
             return String.format("P%c%03d%02d%c", color, dirhams, rugs, isActive ? 'i' : 'o');
+            //String.format() method is to creates a formatted string that contains the attribute info of the player object.
+            //%c: This is a format descriptor that indicates the insertion of a char after it.
+
+            //%03d: indicates the insertion of an integer after it, and requires at least 3 characters to represent it.
+            // Integers less than 3 digits will be filled with zeros.
+
+            //isActive ? 'i' : 'o'：这是一个条件表达式，根据玩家的活动状态 (isActive) 决定插入字符 'i'（如果活跃）或 'o'（如果不活跃）。
         }
     }
