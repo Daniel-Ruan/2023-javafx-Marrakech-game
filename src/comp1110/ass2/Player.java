@@ -86,6 +86,23 @@
             //create a new object 'Player', use the info before to initiate the game condition.
         }
 
+        public static boolean hasGameEnded(String currentGame) {
+            String[] playerInfoArray = extractPlayerInfo(currentGame);
+            boolean allRugsPlaced = true;
+            for(String playerInfo : playerInfoArray) {
+                int dirhams = Integer.parseInt(playerInfo.substring(2, 5));
+                int rugs = Integer.parseInt(playerInfo.substring(5, 7));
+
+                // 如果某个玩家的dirhams为0，则不考虑这个玩家的rugs数量
+                if(dirhams > 0 && rugs > 0) {
+                    // 如果还有dirhams并且还有rugs未放置，说明游戏还未结束
+                    allRugsPlaced = false;
+                    break;
+                }
+            }
+            return allRugsPlaced;
+        }
+
         /**
          * Extracts the information for all players from the given game state string.
          *

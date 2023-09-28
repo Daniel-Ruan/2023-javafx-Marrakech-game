@@ -99,8 +99,29 @@ public class Marrakech {
      * @return true if the game is over, or false otherwise.
      */
     public static boolean isGameOver(String currentGame) {
+
+
+        String[] playerInfoArray = Player.extractPlayerInfo(currentGame);
+        boolean allRugsPlaced = true;
+
+        for (String playerInfo : playerInfoArray) {
+            Player player = Player.fromString(playerInfo);
+            int dirhams = player.getDirhams();
+            int rugs = player.getRugs();
+
+            // 如果某个玩家的dirhams为0，则不考虑这个玩家的rugs数量
+            if(dirhams > 0 && rugs > 0) {
+                // 如果还有dirhams并且还有rugs未放置，说明游戏还未结束
+                allRugsPlaced = false;
+                break;
+            }
+        }
+
+        return allRugsPlaced;  // 如果所有的rugs都已放置，则游戏结束
+
+//        return Player.hasGameEnded(currentGame); // 字符串方法，已弃用
+
         // FIXME: Task 8
-        return false;
     }
 
     /**
@@ -117,8 +138,61 @@ public class Marrakech {
      * rotation is illegal.
      */
     public static String rotateAssam(String currentAssam, int rotation) {
+
+        if (currentAssam == null || currentAssam.isEmpty()) {
+            return "";  // 返回空字符串如果输入无效
+        }
+
+        char currentDirection = currentAssam.charAt(currentAssam.length() - 1);  // 获取当前方向
+        char newDirection = currentDirection;  // 初始化新方向为当前方向
+
+        if (rotation == 90) {
+            // 右转90度
+            switch (currentDirection) {
+                case 'N':
+                    newDirection = 'E';
+                    break;
+                case 'E':
+                    newDirection = 'S';
+                    break;
+                case 'S':
+                    newDirection = 'W';
+                    break;
+                case 'W':
+                    newDirection = 'N';
+                    break;
+                default:
+                    return currentAssam;  // 非法方向输入，返回原状态
+            }
+        } else if (rotation == -90 || rotation == 270) {
+            // 左转90度
+            switch (currentDirection) {
+                case 'N':
+                    newDirection = 'W';
+                    break;
+                case 'E':
+                    newDirection = 'N';
+                    break;
+                case 'S':
+                    newDirection = 'E';
+                    break;
+                case 'W':
+                    newDirection = 'S';
+                    break;
+                default:
+                    return currentAssam;  // 非法方向输入，返回原状态
+            }
+        } else if (rotation == 0) {
+            // 保持当前方向不变
+            newDirection = currentDirection;
+        } else {
+            // 非法的旋转角度输入，返回原状态
+            return currentAssam;
+        }
+
+        // 构造新的Assam状态字符串并返回
+        return currentAssam.substring(0, currentAssam.length() - 1) + newDirection;
         // FIXME: Task 9
-        return "";
     }
 
     /**
