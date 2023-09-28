@@ -65,6 +65,26 @@
             isActive = active;
         }
 
+        public int canAfford(int x) {
+            if (this.dirhams >= x) {
+                this.dirhams -= x;  // 扣除费用
+                return x;  // 返回全额支付的金额
+            } else {
+                int actualPaidAmount = this.dirhams;  // 保存实际支付的金额
+                this.dirhams = 0;  // 清空玩家的货币
+                return actualPaidAmount;  // 返回实际支付的金额
+            }
+        }
+
+        public void addDirhams(int amount) {
+            // 判断输入的金额是否为正整数
+            if (amount > 0) {
+                this.dirhams += amount;  // 增加dirhams的数量
+            } else {
+                System.err.println("Invalid amount. Amount should be a positive integer.");  // 输出错误信息
+            }
+        }
+
         /**
          * Constructs a new Player from a string representation.
          *
