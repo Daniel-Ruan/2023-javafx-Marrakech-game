@@ -1,11 +1,28 @@
 package comp1110.ass2;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Assam {
     // The position of Assam represented as an IntPair (x, y)
     private IntPair position;
 
     // Assam's orientation ('N', 'E', 'S', 'W')
     private char orientation;
+
+    private static final Map<Character, Character> RIGHT_ROTATION_MAP = new HashMap<>() {{
+        put('N', 'E');
+        put('E', 'S');
+        put('S', 'W');
+        put('W', 'N');
+    }};
+
+    private static final Map<Character, Character> LEFT_ROTATION_MAP = new HashMap<>() {{
+        put('N', 'W');
+        put('E', 'N');
+        put('S', 'E');
+        put('W', 'S');
+    }};
 
     /**
      * Constructs a new Assam with the given parameters.
@@ -57,6 +74,19 @@ public class Assam {
         }
 
         return input.substring(indexA + 1, indexB);
+    }
+
+    public static char getNewDirection(char currentDirection, int rotation) {
+        if (rotation == 90) {
+            return RIGHT_ROTATION_MAP.getOrDefault(currentDirection, currentDirection);
+        } else if (rotation == -90 || rotation == 270) {
+            return LEFT_ROTATION_MAP.getOrDefault(currentDirection, currentDirection);
+        } else if (rotation == 0) {
+            return currentDirection;
+        } else {
+            // 非法的旋转角度
+            throw new IllegalArgumentException("Invalid rotation: " + rotation);
+        }
     }
 
     /**
