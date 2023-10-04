@@ -13,7 +13,7 @@ public class PlayerColorTest {
 
         // test a valid color
         char validColor = 'c'; // assume 'c' is a valid color
-        boolean isValid = player.isValidColor(validColor);
+        boolean isValid = Player.isValidColor(validColor);
         Assertions.assertTrue(isValid, "Expected valid color to return true");
     }
 
@@ -24,7 +24,7 @@ public class PlayerColorTest {
 
         // test an invalid color
         char invalidColor = 'x'; // assume 'x' is an invalid color
-        boolean isValid = player1.isValidColor(invalidColor);
+        boolean isValid = Player.isValidColor(invalidColor);
         Assertions.assertFalse(isValid, "Expected invalid color to return false");
     }
 }

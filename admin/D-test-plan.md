@@ -96,7 +96,7 @@ static methods for which we have already provided unit tests.
 
 4. ### **Player**: 
 
-   - Getter & setter: `public char getColor()`, `public int getDirhams()`, `ublic String getPlayerStates()`, `public int getRugs()`
+   - Getter & setter: `public char getColor()`, `public int getDirhams()`, `public String getPlayerStates()`, `public int getRugs()`
 
    ```java
    @Test
