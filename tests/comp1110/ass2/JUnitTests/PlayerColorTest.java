@@ -27,4 +27,26 @@ public class PlayerColorTest {
         boolean isValid = Player.isValidColor(invalidColor);
         Assertions.assertFalse(isValid, "Expected invalid color to return false");
     }
+
+    @Test
+    public void testIsValidNumberInvalid() {
+        // create an object of player
+        Player player2 = new Player('4', 30, 15, true);
+
+        // test an invalid number
+        char invalidNumber = '4'; // assume 'x' is an invalid color
+        boolean isValid = Player.isValidColor(invalidNumber);
+        Assertions.assertFalse(isValid, "Expected invalid number to return false");
+    }
+
+    @Test
+    public void testIsValidCharInvalid() {
+        // create an object of player
+        Player player3 = new Player('#', 30, 15, true);
+
+        // test an invalid charater
+        char invalidChar = '#'; // assume 'x' is an invalid color
+        boolean isValid = Player.isValidColor(invalidChar);
+        Assertions.assertFalse(isValid, "Expected invalid character to return false");
+    }
 }
