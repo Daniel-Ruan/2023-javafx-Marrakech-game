@@ -56,11 +56,11 @@ The given method `getWinner` aims to determine the winner of a game given a `gam
 
 **Advantages:**
 
-1. **Structured Steps**: The method is divided into clear steps: extracting player information, initializing the board, and then calculating the winner.
-2. **Iterative Player Analysis**: The loop iteratively analyzes each player's score and maintains a track of the player with the highest score.
-3. **Descriptive Variable Naming**: The variable names like `highestScore`, `highestDirhams`, and `currentWinner` make the code easy to follow.
-4. **Return Logic**: The method correctly returns 't' for ties and the winning color character otherwise.
+1. **Scalability**: The code is designed to handle multiple players (in this case, 4 players), making it scalable for different game configurations without major modifications.
+2.  **Flexibility**: The code can be easily adapted for different game rules or scoring mechanisms by modifying specific parts of the logic. It allows for flexibility in game design.
+3.  **Maintainability**: The code separates different aspects of the game (player information, board state) into distinct components, enhancing maintainability. Changes in one area are less likely to affect other parts of the code.
 
 **Areas for Improvement:**
 
 1. **Comments**: While the method has some comments, adding a few more comments detailing complex logic or decisions would further improve readability.
+2. **Code Efficiency:** Analyze the algorithm's time complexity and optimize the code if needed, especially if this function is expected to run on large datasets.
