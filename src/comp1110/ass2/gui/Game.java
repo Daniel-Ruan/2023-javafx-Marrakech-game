@@ -82,7 +82,7 @@ public class Game extends Application {
         // FIXME Task 7 and 15
         Scene scene = new Scene(this.root, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setScene(scene);
-        stage.setTitle("game");
+        stage.setTitle("Marrakech game");
         showPlayerSelection();  // 显示玩家选择界面
         stage.show();
     }
