@@ -2,7 +2,7 @@ package comp1110.ass2;
 
 public class Board {
     public static final int BOARD_SIZE = 7; // 假设棋盘是 7x7
-    private Cell[][] board;
+    public Cell[][] board;
 
     public Board() {
         board = new Cell[BOARD_SIZE][BOARD_SIZE];

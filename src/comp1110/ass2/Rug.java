@@ -70,6 +70,6 @@ public class Rug {
         String cell1RugString = cell1.toRugString(); // 使用 Cell 类里的 toRugString()
 
         // 假设 cell1 和 cell2 有相同的颜色和 rugID，我们只需取一个即可
-        return String.format("%s%d%d%d%d", cell1RugString, position1.getX(), position1.getY(), position2.getX(), position2.getY());
+        return String.format("%s%d%d%d%d", cell1RugString, position1.getX(),position1.getY(), position2.getX(), position2.getY());
     }
 }

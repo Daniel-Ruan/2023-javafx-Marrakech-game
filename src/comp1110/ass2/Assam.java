@@ -10,6 +10,8 @@ public class Assam {
     // Assam's orientation ('N', 'E', 'S', 'W')
     private char orientation;
 
+    private int angle;
+
     private static final Map<Character, Character> RIGHT_ROTATION_MAP = new HashMap<>() {{
         put('N', 'E');
         put('E', 'S');
@@ -33,6 +35,7 @@ public class Assam {
     public Assam(IntPair position, char orientation) {
         this.position = position;
         this.orientation = orientation;
+        this.angle = orientationToDegrees(orientation);
     }
 
     // Getter and setter methods
@@ -52,17 +55,77 @@ public class Assam {
         this.orientation = orientation;
     }
 
+
+    public void setAngle(char ori) {
+        this.angle = orientationToDegrees(ori);
+    }
+
+    public int getAngle() {
+        return angle;
+    }
+    public void changeAngle(int a) {
+        int proposedAngle = this.angle + a;
+
+        if (isValidRotation(proposedAngle)) {
+            this.angle = proposedAngle % 360;  // 确保angle值在[0, 360)范围内
+        } else {
+            this.angle = orientationToDegrees(orientation);
+        }
+    }
+
+    public boolean isValidRotation(int proposedAngle) {
+        int difference = (proposedAngle - orientationToDegrees(orientation) + 360) % 360;
+        return difference == 0 || difference == 90 || difference == 270;
+    }
+
+
+
+    public void updateOrientationFromAngle() {
+        // Normalize angle to [0, 360) range
+        int normalizedAngle = ((angle % 360) + 360) % 360;
+
+        if (normalizedAngle == 0 ) {
+            this.orientation = 'N';
+        } else if (normalizedAngle == 90) {
+            this.orientation = 'E';
+        } else if (normalizedAngle == 180) {
+            this.orientation = 'S';
+        } else {
+            this.orientation = 'W';
+        }
+    }
+
+    public boolean isCurrentAngleValid() {
+        return isValidRotation(this.angle);
+    }
+
+
     /**
      * Constructs a new Assam from a string representation.
      *
      * @param str the string representation of Assam
      * @return a new Assam object
      */
-    public static Assam fromString(String str) {
-        int x = Character.getNumericValue(str.charAt(1));
-        int y = Character.getNumericValue(str.charAt(2));
-        char orientation = str.charAt(3);
+    public static Assam fromString(String assamString) {
+        int x = Character.getNumericValue(assamString.charAt(0));
+        int y = Character.getNumericValue(assamString.charAt(1));
+        char orientation = assamString.charAt(2);
         return new Assam(new IntPair(x, y), orientation);
+    }
+
+    public static int orientationToDegrees(char orientation) {
+        switch (orientation) {
+            case 'N':
+                return 0;
+            case 'E':
+                return 90;
+            case 'S':
+                return 180;
+            case 'W':
+                return 270;
+            default:
+                throw new IllegalArgumentException("Invalid orientation: " + orientation);
+        }
     }
 
     public static String getContentBetweenAandB(String input) {
@@ -87,6 +150,19 @@ public class Assam {
             // 非法的旋转角度
             throw new IllegalArgumentException("Invalid rotation: " + rotation);
         }
+    }
+    public void setAssam(String assamString) {
+        int x = Character.getNumericValue(assamString.charAt(0));
+        int y = Character.getNumericValue(assamString.charAt(1));
+        char orientation = assamString.charAt(2);
+        setPosition(new IntPair(x, y));
+        setOrientation(orientation);
+        setAngle(orientation);
+    }
+
+
+    public void rotate(int degree) {
+        this.orientation = getNewDirection(this.orientation, degree);
     }
 
     /**

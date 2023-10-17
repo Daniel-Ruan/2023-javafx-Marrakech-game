@@ -4,9 +4,9 @@ import comp1110.ass2.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import javafx.scene.transform.Rotate;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
@@ -28,6 +28,8 @@ public class Game extends Application {
     private static final char[] PLAYER_COLORS = {'c', 'y', 'p', 'r'};  // Declare it as a class constant.
 
 
+    GUIMarrakech guiMarrakech;
+    MarrakechGame game;
     private Player[] players;
     private Assam assam;
     private Board board;
@@ -81,10 +83,124 @@ public class Game extends Application {
     public void start(Stage stage) throws Exception {
         // FIXME Task 7 and 15
         Scene scene = new Scene(this.root, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        game = new MarrakechGame(4);
+        guiMarrakech = new GUIMarrakech(game);
+        guiMarrakech.update();
+        root.getChildren().add(guiMarrakech);
+
+
+        scene.setOnMouseClicked(event -> {
+            if (game.phase == 0) {
+                if (Marrakech.isGameOver(game.generateGameState())) {
+                    game.phase = -1;
+                    return;
+                }
+                System.out.println("phase 0 click");
+                if (game.assam.isCurrentAngleValid()) {
+                    game.assam.updateOrientationFromAngle();
+                    game.phase = 1;
+                    System.out.println("finish phase 0 click. gameString: " + game.generateGameState());
+                }
+            } else if (game.phase == 1) {
+                System.out.println("phase 1 click");
+                var step = Marrakech.rollDie();
+                game.moveAssamInGame(step);
+                System.out.println("1 gameString: " + game.generateGameState());
+                var currentPlayer = game.players[game.currentPlayerIndex];
+                var color = game.board.getCell(game.assam.getPosition()).getColor();
+                System.out.println("phase 1 click payer color: " + color);
+                var payer = game.getPlayer(color);
+                int dollar = Marrakech.getPaymentAmount(game.generateGameState());
+                System.out.println("Pay " + dollar);
+                if (payer != null && payer != currentPlayer) {
+                    if (payer.isActive()) {
+                        game.payTo(currentPlayer, dollar);
+                        payer.addDirhams(dollar);
+                    }
+                }
+                guiMarrakech.guiBoard.update();
+                if (!currentPlayer.isActive()) {
+                    game.phase =0;
+                    game.turnNext();
+                } else {
+                    game.phase =2;
+                    System.out.println("finish phase 1 click Player: " + game.currentPlayerIndex);
+                }
+            } else if (game.phase == 2) {
+                System.out.println("phase 2 click");
+                var guiCells = guiMarrakech.guiBoard.getHighLightCells();
+                if (guiCells.length == 2) {
+                    var player = game.players[game.currentPlayerIndex];
+//                    var position = new IntPair[]{guiCells[0].cell.getPosition(), guiCells[1].cell.getPosition()};
+                    var newCell1 = new Cell(guiCells[0].cell.getPosition(),player.getColor(), 15 - player.getRugs());
+                    var newCell2 = new Cell(guiCells[1].cell.getPosition(),player.getColor(), 15 - player.getRugs());
+                    var rug = new Rug(newCell1, newCell2);
+                    System.out.println("player" + player.toPlayerString());
+                    System.out.println("cell1" + newCell1.getPosition().toString());
+                    System.out.println("cell2" + newCell2.getPosition().toString());
+                    System.out.println("Rug" + Rug.toRugString(rug));
+                    System.out.println("phase 2 click bool" + game.isPlacedAllowed(rug));
+                    System.out.println("phase 2 click isPlacementValid" + Marrakech.isPlacementValid(game.generateGameState(), Rug.toRugString(rug)));
+                    System.out.println("phase 2 click isRugValid" + Marrakech.isRugValid(game.generateGameState(), Rug.toRugString(rug)));
+                    System.out.println("phase 2 click" + game.isPlacedAllowed(rug));
+
+                    if (game.isPlacedAllowed(rug)) {
+                        game.makePlacementInGame(rug);
+                        game.phase = 0;
+                        game.turnNext();
+//                        System.out.println("phase 2 click player " + game.currentPlayerIndex);
+                    } else {
+                        System.out.println("phase 2 click player " + game.generateGameState());
+
+                    }
+
+                }
+
+            }else {
+                System.out.println("game over");
+            }
+            guiMarrakech.update();
+
+
+        });
+
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.RIGHT) { // 当按下右方向键时
+                if (game.phase == 0) {
+                    game.assam.changeAngle(90);
+                    guiMarrakech.guiBoard.update();
+                } else if (game.phase == 2) {
+                    guiMarrakech.guiBoard.rotateHighLightDegree(90);
+                }
+            } else if (event.getCode() == KeyCode.LEFT) {
+                if (game.phase == 0) {
+                    game.assam.changeAngle(-90);
+                    guiMarrakech.guiBoard.update();
+                } else if (game.phase == 2) {
+                    guiMarrakech.guiBoard.rotateHighLightDegree(-90);
+                }
+
+
+            }
+            // 可以为其他方向键添加更多的操作，例如使用KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT等
+        });
+
+//        scene.setOnScroll(event -> {
+//            if (game.phase == 0) {
+//                game.assam.rotate(90);
+//                guiMarrakech.guiBoard.update();
+//            } else if (game.phase == 2) {
+//                guiMarrakech.guiBoard.rotateHighLightDegree(90);
+//
+//            }
+//        });
+
         stage.setScene(scene);
         stage.setTitle("Marrakech game");
-        showPlayerSelection();  // 显示玩家选择界面
+//        showPlayerSelection();  // 显示玩家选择界面
         stage.show();
+
     }
 
     private void showPlayerSelection() {
@@ -457,6 +573,8 @@ public class Game extends Application {
 
     }
 
+
+
     public void startActualGame() {
         try {
             playGame();
@@ -465,7 +583,6 @@ public class Game extends Application {
             System.out.println("Game was interrupted!");
         }
     }
-
 
 }
 

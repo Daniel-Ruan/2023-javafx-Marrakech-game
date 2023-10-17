@@ -62,7 +62,7 @@
         }
 
         public void setActive(boolean active) {
-            isActive = active;
+            this.isActive = active;
         }
 
         public int canAfford(int x) {
@@ -78,11 +78,23 @@
 
         public void addDirhams(int amount) {
             // 判断输入的金额是否为正整数
-            if (amount > 0) {
+            if (amount >= 0) {
                 this.dirhams += amount;  // 增加dirhams的数量
             } else {
                 System.err.println("Invalid amount. Amount should be a positive integer.");  // 输出错误信息
             }
+        }
+
+        public void setPlayer(String playerString) {
+
+            int newDirhams = Integer.parseInt(playerString.substring(2, 5));
+            int newRugs = Integer.parseInt(playerString.substring(5, 7));
+            boolean newIsActive = (playerString.charAt(7) == 'i');
+
+            setRugs(newDirhams);
+            setRugs(newRugs);
+            setActive(newIsActive);
+
         }
 
         /**
