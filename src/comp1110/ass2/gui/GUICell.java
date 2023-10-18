@@ -23,8 +23,8 @@ public class GUICell extends Group {
         this.guiBoard = guiBoard;
 
         rect = new Rectangle(size, size);
-        rect.setArcWidth(10);
-        rect.setArcHeight(10);
+        rect.setArcWidth(0);
+        rect.setArcHeight(0);
         rect.setOnMouseEntered(event -> {
             if (game.phase == 2) {
                 guiBoard.setHighLightPosition(cell.getPosition());

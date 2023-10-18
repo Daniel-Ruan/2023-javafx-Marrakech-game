@@ -13,6 +13,6 @@ public class GameTools {
         if (color =='c') return Color.web("#00cec9");
         if (color =='r') return Color.web("#ff7675");
         if (color =='p') return Color.web("#a29bfe");
-        return Color.web("#dfe6e9");
+        return Color.web("#dfe6e9", 0);
     }
 }

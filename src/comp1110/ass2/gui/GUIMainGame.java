@@ -16,12 +16,29 @@ public class GUIMainGame extends Group {
     public GUIMarrakech guiMarrakech;
 
     public GUIMainGame(MarrakechGame game, double windowWidth, double windowHeight) {
-        this.setFocusTraversable(true);
+
         this.game = game;
         guiMarrakech = new GUIMarrakech(game);
         guiMarrakech.update();
         this.getChildren().add(guiMarrakech);
 
+        this.setOnScroll(event -> {
+            if (event.getDeltaY() > 0) { // 鼠标向前滚动
+                if (game.phase == 0) {
+                    game.assam.changeAngle(-90);
+                    guiMarrakech.guiBoard.update();
+                } else if (game.phase == 2) {
+                    guiMarrakech.guiBoard.rotateHighLightDegree(-90);
+                }
+            } else if (event.getDeltaY() < 0) { // 鼠标向后滚动
+                if (game.phase == 0) {
+                    game.assam.changeAngle(90);
+                    guiMarrakech.guiBoard.update();
+                } else if (game.phase == 2) {
+                    guiMarrakech.guiBoard.rotateHighLightDegree(90);
+                }
+            }
+        });
         this.setOnMouseClicked(event -> {
             if (game.phase == 0) {
                 if (Marrakech.isGameOver(game.generateGameState())) {
@@ -92,24 +109,7 @@ public class GUIMainGame extends Group {
             guiMarrakech.update();
         });
 
-        this.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.RIGHT) { // 当按下右方向键时
-                if (game.phase == 0) {
-                    game.assam.changeAngle(-270);
-                    guiMarrakech.guiBoard.update();
-                } else if (game.phase == 2) {
-                    guiMarrakech.guiBoard.rotateHighLightDegree(90);
-                }
-            } else if (event.getCode() == KeyCode.LEFT) {
-                if (game.phase == 0) {
-                    game.assam.changeAngle(-90);
-                    guiMarrakech.guiBoard.update();
-                } else if (game.phase == 2) {
-                    guiMarrakech.guiBoard.rotateHighLightDegree(-90);
-                }
-            }
-            // 可以为其他方向键添加更多的操作，例如使用KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT等
-        });
+
 
     }
 }

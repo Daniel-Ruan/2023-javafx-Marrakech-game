@@ -15,11 +15,11 @@ public class GUIAlertInformation extends Group {
         toastLabel.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-padding: 20px; -fx-font-size: 20px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
 
         StackPane toastContainer = new StackPane(toastLabel);
-        toastContainer.setLayoutX((windowWidth - toastLabel.getWidth()) / 2);
+        toastContainer.setLayoutX((windowWidth - toastLabel.getWidth()) / 2 + 200);
 
         // 根据已经显示的信息数量调整y位置
         double yOffset = displayedMessagesCount * (toastLabel.getHeight() + 100); // 10是两个信息之间的间距
-        toastContainer.setLayoutY((windowHeight - toastLabel.getHeight()) / 2 + yOffset);
+        toastContainer.setLayoutY((windowHeight - toastLabel.getHeight()) / 2 + yOffset + 30);
 
         this.getChildren().add(toastContainer);
 
