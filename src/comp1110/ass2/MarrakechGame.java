@@ -163,17 +163,48 @@ public class MarrakechGame {
             return;  // 如果没有活着的玩家，直接返回
         }
 
+        // 获取当前玩家的颜色
+        char currentPlayerColor = players[currentPlayerIndex].getColor();
+        Player currentPlayer = getPlayerByColor(currentPlayerColor);
+
         int currentIndex = -1;
-        for (int i = 0; i < activePlayers.size(); i++) {
-            if (players[currentPlayerIndex].getColor() == activePlayers.get(i).getColor()) {
-                currentIndex = i;
-                break;
+        if (currentPlayer.isActive()) { // 如果当前玩家仍然活跃
+            for (int i = 0; i < activePlayers.size(); i++) {
+                if (currentPlayerColor == activePlayers.get(i).getColor()) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+        } else { // 如果当前玩家不再活跃
+            // 寻找下一个活跃的玩家
+            for (int i = 0; i < PLAYER_COLORS.length; i++) {
+                if (PLAYER_COLORS[i] == currentPlayerColor) {
+                    for (int j = i + 1; j < PLAYER_COLORS.length; j++) {
+                        for (Player activePlayer : activePlayers) {
+                            if (activePlayer.getColor() == PLAYER_COLORS[j]) {
+                                currentIndex = activePlayers.indexOf(activePlayer) - 1; // 下面的代码会对currentIndex加1，因此这里减1
+                                break;
+                            }
+                        }
+                        if (currentIndex != -1) break;
+                    }
+                    if (currentIndex != -1) break;
+                }
             }
         }
 
         // 获取下一个玩家的索引
         char nextPlayerColor = activePlayers.get((currentIndex + 1) % activePlayers.size()).getColor();
         currentPlayerIndex = getPlayerIndexByColor(nextPlayerColor);
+    }
+
+    private Player getPlayerByColor(char color) {
+        for (Player player : players) {
+            if (player.getColor() == color) {
+                return player;
+            }
+        }
+        return null;
     }
 
     private int getPlayerIndexByColor(char color) {

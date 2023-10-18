@@ -18,9 +18,10 @@ public class GUIPlayerInformation extends Group {
             var guiPlayer = new GUIPlayer(game);
             guiPlayers[i] = guiPlayer;
 
-            guiPlayer.setLayoutX((i % 2) * 160);
-            guiPlayer.setLayoutY((i / 2) * 110);
+            guiPlayer.setLayoutX((i % 2) * 180);
+            guiPlayer.setLayoutY(40 +(i / 2) * 130);
         }
+
         this.getChildren().addAll(guiPlayers);
     }
 

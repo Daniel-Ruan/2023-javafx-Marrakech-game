@@ -9,10 +9,10 @@ public class GameTools {
     static Font font = Font.font("Consoles", FontWeight.EXTRA_BOLD, 16);
 
     public static Color getColor(char color) {
-        if (color =='y') return Color.web("#ffd700");
-        if (color =='c') return Color.web("#00cccc");
-        if (color =='r') return Color.RED;
-        if (color =='p') return Color.MEDIUMPURPLE;
-        return Color.LIGHTGREY;
+        if (color =='y') return Color.web("#fdcb6e");
+        if (color =='c') return Color.web("#00cec9");
+        if (color =='r') return Color.web("#ff7675");
+        if (color =='p') return Color.web("#a29bfe");
+        return Color.web("#dfe6e9");
     }
 }

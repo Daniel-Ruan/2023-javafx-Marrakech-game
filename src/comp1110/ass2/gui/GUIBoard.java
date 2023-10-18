@@ -49,7 +49,6 @@ public class GUIBoard extends Group {
         guiAssam.setLayoutX(game.assam.getPosition().getX() * (CELL_SIZE + CELL_GAP));
         guiAssam.setLayoutY(game.assam.getPosition().getY() * (CELL_SIZE + CELL_GAP));
         guiAssam.update();
-        System.out.println("update board");
     }
 
     GUICell getCell (IntPair pos) {

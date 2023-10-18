@@ -31,7 +31,6 @@ public class GUIPlayer extends Group {
     }
 
     void update() {
-        System.out.println("update player" + player);
         if (player != null) {
             coinText.setText("dollars: " + player.getDirhams());
             remainRugNumText.setText("rugs: " + player.getRugs());
