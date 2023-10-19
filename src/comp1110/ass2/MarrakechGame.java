@@ -26,12 +26,13 @@ public class MarrakechGame {
 
     }
 
+    // Initialize the player objects
     private void initializePlayers(int numPlayers) {
 
-        this.players = new Player[4];  // 总是实例化四个玩家
+        this.players = new Player[4];  // Always instantiate four player (总是实例化四个玩家)
 
         for (int i = 0; i < 4; i++) {
-            // 如果当前索引小于玩家数量，则设置isActive为true，否则为false
+            // Set isActive to true for players up to the specified number of players (如果当前索引小于玩家数量，则设置isActive为true，否则为false)
             boolean isActive = i < numPlayers;
             players[i] = new Player(PLAYER_COLORS[i], 30, 15, isActive);
         }
@@ -45,7 +46,7 @@ public class MarrakechGame {
     }
 
     public void setGamePhase(int gamePhase) {
-        // 您可以添加更多的逻辑来验证阶段的更改是否有效
+        // Can add more logic to validate if the phase change is valid可以添加更多的逻辑来验证阶段的更改是否有效
         if (gamePhase < -1 || gamePhase > 2) {
             throw new IllegalArgumentException("Invalid game phase. Must be -1, 0, 1, or 2.");
         }
@@ -56,19 +57,21 @@ public class MarrakechGame {
         return playerAmount;
     }
 
+    // Generate the current game state as a string
     public String generateGameState() {
         StringBuilder gameState = new StringBuilder();
-        // 添加玩家信息
+        // Add player information (添加玩家信息)
         for (Player player : players) {
             gameState.append(player.toPlayerString());
         }
-        // 添加Assam信息
+        // Add Assam information (添加Assam信息)
         gameState.append(assam.toAssamString());
-        // 添加棋盘信息
+        // Add board information (添加棋盘信息)
         gameState.append(board.toBoardString());
         return gameState.toString();
     }
 
+    // Move Assam within the game
     public void moveAssamInGame(int steps) {
         String currentAssamStr = assam.toAssamString();
         String newAssamStr = Marrakech.moveAssam(currentAssamStr, steps);
@@ -87,24 +90,25 @@ public class MarrakechGame {
                 return player;
             }
         }
-        return null;  // 如果没有找到匹配的玩家，返回null
+        return null;  // Return null if no matching player is found (如果没有找到匹配的玩家，返回null)
     }
 
+    // Deduct dirhams from a player's account
     public void payTo(Player player, int amount) {
-        // 获取玩家当前的dirhams
+        // Get the player's current dirhams (获取玩家当前的dirhams)
         int currentDirhams = player.getDirhams();
 
-        // 扣除指定数量的dirhams
+        // Deduct the specified amount of dirhams (扣除指定数量的dirhams)
         int newDirhams = currentDirhams - amount;
 
         if (newDirhams < 0) {
-            newDirhams = 0;  // 确保dirhams不会为负数
+            newDirhams = 0;  // Ensure dirhams do not go negative (确保dirhams不会为负数)
         }
 
-        // 更新玩家的dirhams数量
+        // Update the player's dirhams count (更新玩家的dirhams数量)
         player.setDirhams(newDirhams);
 
-        // 如果玩家的dirhams降到0，则将玩家设置为非活动状态
+        // If the player's dirhams drop to 0, set the player to inactive (如果玩家的dirhams降到0，则将玩家设置为非活动状态)
         if (newDirhams == 0) {
             player.setActive(false);
         }
@@ -128,6 +132,7 @@ public class MarrakechGame {
 //        }
 //    }
 
+    // Determine if a rug placement is allowed
     public boolean isPlacedAllowed(Rug rug) {
         String currentGame = generateGameState();
         String rugStr = Rug.toRugString(rug);
@@ -139,6 +144,7 @@ public class MarrakechGame {
         }
     }
 
+    // Make a rug placement in the game
     public void makePlacementInGame(Rug rug) {
         // Generate the current game state
         String currentGame = generateGameState();
@@ -149,6 +155,7 @@ public class MarrakechGame {
         updateGameState(resultGameString);
     }
 
+    // Move to the next active player's turn
     public void turnNext() {
         List<Player> activePlayers = new ArrayList<>();
         for (char color : PLAYER_COLORS) {
@@ -160,15 +167,15 @@ public class MarrakechGame {
         }
 
         if (activePlayers.isEmpty()) {
-            return;  // 如果没有活着的玩家，直接返回
+            return;  // Return if there are no active players(如果没有活着的玩家，直接返回)
         }
 
-        // 获取当前玩家的颜色
+        // Get the current player's color (获取当前玩家的颜色)
         char currentPlayerColor = players[currentPlayerIndex].getColor();
         Player currentPlayer = getPlayerByColor(currentPlayerColor);
 
         int currentIndex = -1;
-        if (currentPlayer.isActive()) { // 如果当前玩家仍然活跃
+        if (currentPlayer.isActive()) { // Check if player is active (如果当前玩家仍然活跃)
             for (int i = 0; i < activePlayers.size(); i++) {
                 if (currentPlayerColor == activePlayers.get(i).getColor()) {
                     currentIndex = i;
@@ -193,11 +200,12 @@ public class MarrakechGame {
             }
         }
 
-        // 获取下一个玩家的索引
+        // Get the index of the next player (获取下一个玩家的索引)
         char nextPlayerColor = activePlayers.get((currentIndex + 1) % activePlayers.size()).getColor();
         currentPlayerIndex = getPlayerIndexByColor(nextPlayerColor);
     }
 
+    // Get the player by color
     private Player getPlayerByColor(char color) {
         for (Player player : players) {
             if (player.getColor() == color) {
@@ -207,13 +215,14 @@ public class MarrakechGame {
         return null;
     }
 
+    // Get the player's index by color
     private int getPlayerIndexByColor(char color) {
         for (int i = 0; i < players.length; i++) {
             if (players[i].getColor() == color) {
                 return i;
             }
         }
-        return currentPlayerIndex;  // 如果某种原因找不到颜色，返回当前玩家索引
+        return currentPlayerIndex;  // If color is not found for some reason (如果某种原因找不到颜色，返回当前玩家索引)
     }
 
     public void updateGameState(String state) {

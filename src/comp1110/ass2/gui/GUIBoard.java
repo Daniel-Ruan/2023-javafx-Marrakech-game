@@ -12,52 +12,52 @@ import javafx.scene.shape.Rectangle;
 
 public class GUIBoard extends Group {
 
-    public MarrakechGame game; // 游戏实例
-    GUICell[][] guiCells; // 用于存储GUICell的数组
-    public static final int CELL_SIZE = 73; // 假设每个单元格的尺寸为50，你可以根据需要修改这个值
-    public static final int CELL_GAP = 0;
-    GUIAssam guiAssam;
-    int highLightDegree;
-    IntPair highLightPosition;
-    Rectangle rect = new Rectangle(700, 700);
-
+    public MarrakechGame game; // Reference to the game instance (游戏实例)
+    GUICell[][] guiCells; // Array to store GUICell instances (用于存储GUICell的数组)
+    public static final int CELL_SIZE = 73; // / Size of each cell 假设每个单元格的尺寸为50，你可以根据需要修改这个值
+    public static final int CELL_GAP = 0;// Gap between cells
+    GUIAssam guiAssam;// Represents the Assam on the board
+    int highLightDegree;// Degree of highlighting
+    IntPair highLightPosition;// Position to highlight
+    Rectangle rect = new Rectangle(700, 700);// Background rectangle
+    // Constructor for GUIBoard
     public GUIBoard(MarrakechGame game) {
         this.game = game;
-        // 1. 创建一个ImagePattern对象并加载图片资源
+        // Create an ImagePattern object and load the game board image resource (创建一个ImagePattern对象并加载图片资源)
         ImagePattern imgPat = new ImagePattern(new Image("file:assets/gameBoard.png"));
 
-        // 2. 创建一个Rectangle对象并设置它的尺寸
+        // Create a Rectangle and set the size (创建一个Rectangle对象并设置它的尺寸)
         rect.setLayoutX(-50);
         rect.setLayoutY(-50);
-        // 3. 使用ImagePattern填充Rectangle
+        // Fill the Rectangle with the ImagePattern (使用ImagePattern填充Rectangle)
         rect.setFill(imgPat);
 
-        // 4. 将Rectangle添加到GUIBoard中
+        // Add the Rectangle to the GUIBoard (将Rectangle添加到GUIBoard中)
         this.getChildren().add(rect);
-
+        // Initialize the board and add the Assam
         initializeBoard();
         guiAssam = new GUIAssam(game, game.assam, CELL_SIZE);
         this.getChildren().add(guiAssam);
 
 
     }
-
+    // Initialize the GUI board based on the game board
     private void initializeBoard() {
-        Board board = game.board; // 从游戏实例中获取Board
-        guiCells = new GUICell[Board.BOARD_SIZE][Board.BOARD_SIZE]; // 初始化GUICell数组
+        Board board = game.board; //Get the game board (从游戏实例中获取Board)
+        guiCells = new GUICell[Board.BOARD_SIZE][Board.BOARD_SIZE]; // Initialize the GUICell array (初始化GUICell数组)
 
         for (int col = 0; col < Board.BOARD_SIZE; col++) {
             for (int row = 0; row < Board.BOARD_SIZE; row++) {
-                Cell cell = board.board[col][row]; // 从Board获取Cell
-                GUICell guiCell = new GUICell(game, cell, CELL_SIZE, this); // 创建GUICell
-                guiCell.setLayoutX(col * (CELL_SIZE + CELL_GAP) + 48); // 设置GUICell的位置
+                Cell cell = board.board[col][row]; // Get the Cell from the Board (从Board获取Cell)
+                GUICell guiCell = new GUICell(game, cell, CELL_SIZE, this); // Create a GUICell (创建GUICell)
+                guiCell.setLayoutX(col * (CELL_SIZE + CELL_GAP) + 48); // Set the GUICell's position (设置GUICell的位置)
                 guiCell.setLayoutY(row * (CELL_SIZE + CELL_GAP) + 47);
-                guiCells[col][row] = guiCell; // 将GUICell存储在数组中
-                this.getChildren().add(guiCell); // 将GUICell添加到GUIBoard
+                guiCells[col][row] = guiCell; // Store the GUICell in the array (将GUICell存储在数组中)
+                this.getChildren().add(guiCell); // Add the GUICell to the GUIBoard (将GUICell添加到GUIBoard)
             }
         }
     }
-
+    // Update the GUI board based on the game state
     void update() {
             System.out.println("board update");
         for (int col = 0; col < Board.BOARD_SIZE; col++) {
@@ -69,13 +69,14 @@ public class GUIBoard extends Group {
         guiAssam.setLayoutY(game.assam.getPosition().getY() * (CELL_SIZE + CELL_GAP) + 47);
         guiAssam.update();
     }
-
+    // Get the GUICell at a specific position
     GUICell getCell (IntPair pos) {
         if (pos == null || pos.getX() < 0 || pos.getX() >= Board.BOARD_SIZE || pos.getY() < 0 || pos.getY() >= Board.BOARD_SIZE) {
             return null;
         }
         return guiCells[pos.getX()][pos.getY()];
     }
+    // Get an array of GUICells that are highlighted
     GUICell[] getHighLightCells() {
         if (highLightPosition == null) {
             return new GUICell[0];
@@ -105,10 +106,11 @@ public class GUIBoard extends Group {
         if (guiCell2 ==null) return new GUICell[]{guiCell1};
         return new GUICell[]{guiCell1, guiCell2};
     }
+    // Set the position to highlight
     void setHighLightPosition(IntPair pos) {
-        updateHighlightStatus(false); // 取消当前高亮
+        updateHighlightStatus(false); //Clear the current highlight (取消当前高亮)
         highLightPosition = pos;
-        updateHighlightStatus(true); // 应用新高亮
+        updateHighlightStatus(true); // Apply the new highlight (应用新高亮)
     }
 
     void rotateHighLightDegree(int degree) {
@@ -118,9 +120,9 @@ public class GUIBoard extends Group {
     //可能有问题
 
     void setHighLightDegree(int degree) {
-        updateHighlightStatus(false); // 取消当前高亮
+        updateHighlightStatus(false); // Clear the current highlight (取消当前高亮)
         highLightDegree = degree;
-        updateHighlightStatus(true); // 应用新高亮
+        updateHighlightStatus(true); // Apply the new highlight (应用新高亮)
 
     }
 

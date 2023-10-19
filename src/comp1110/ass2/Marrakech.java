@@ -22,6 +22,7 @@ public class Marrakech {
      * @param rug A String representing the rug you are checking
      * @return true if the rug is valid, and false otherwise.
      */
+    // Check if the rug is valid based on specific criteria.
     public static boolean isRugValid(String gameString, String rug) {
         if (rug.length() != 7) return false;
         char color = rug.charAt(0);
@@ -50,14 +51,14 @@ public class Marrakech {
 
         String rugString = rug.substring(0, 3);
 
-        // 将boardString分割成每个格子的字符串数组
+        // Split boardString into an array of strings for each cell (将boardString分割成每个格子的字符串数组)
         int cellCount = boardString.length() / 3;
         String[] cells = new String[cellCount];
         for (int i = 0; i < cellCount; i++) {
             cells[i] = boardString.substring(i * 3, i * 3 + 3);
         }
 
-        // 遍历数组，检查是否有与rugString匹配的格子
+        // Walk through the set, checking for any grids that match the rugString (遍历数组，检查是否有与rugString匹配的格子)
         for (String cell : cells) {
             if (cell.equals(rugString)) {
                 return false;
@@ -84,6 +85,7 @@ public class Marrakech {
      * @return The result of the roll of the die meeting the criteria above
      */
     public static int rollDie() {
+        // Roll the special Marrakech die with a specific distribution.
         SpecialDie specialDie = new SpecialDie();
         return specialDie.roll();
         // FIXME: Task 6
@@ -99,7 +101,7 @@ public class Marrakech {
      * @return true if the game is over, or false otherwise.
      */
     public static boolean isGameOver(String currentGame) {
-
+        // Check if the game is over based on the conditions provided in the README.
 
         String[] playerInfoArray = Player.extractPlayerInfo(currentGame);
         boolean allRugsPlaced = true;
@@ -109,15 +111,15 @@ public class Marrakech {
             int dirhams = player.getDirhams();
             int rugs = player.getRugs();
 
-            // 如果某个玩家的dirhams为0，则不考虑这个玩家的rugs数量
+            // If a player's dirhams are 0, the number of rugs for that player is not taken into account (如果某个玩家的dirhams为0，则不考虑这个玩家的rugs数量)
             if(dirhams > 0 && rugs > 0) {
-                // 如果还有dirhams并且还有rugs未放置，说明游戏还未结束
+                // If there are still dirhams and rugs left, the game is not over(如果还有dirhams并且还有rugs未放置，说明游戏还未结束)
                 allRugsPlaced = false;
                 break;
             }
         }
 
-        return allRugsPlaced;  // 如果所有的rugs都已放置，则游戏结束
+        return allRugsPlaced;  // If all rugs are placed, gave over(如果所有的rugs都已放置，则游戏结束)
 
 //        return Player.hasGameEnded(currentGame); // 字符串方法，已弃用
 
@@ -140,19 +142,19 @@ public class Marrakech {
     public static String rotateAssam(String currentAssam, int rotation) {
 
         if (currentAssam == null || currentAssam.isEmpty()) {
-            return "";  // 返回空字符串如果输入无效
+            return "";  // If enter invalid, return empty (返回空字符串如果输入无效)
         }
 
-        char currentDirection = currentAssam.charAt(currentAssam.length() - 1);  // 获取当前方向
-        char newDirection = currentDirection;  // 初始化新方向为当前方向
+        char currentDirection = currentAssam.charAt(currentAssam.length() - 1);  // get current direction(获取当前方向)
+        char newDirection = currentDirection;  // Initialize the new direction to the current direction(初始化新方向为当前方向)
 
         try {
             newDirection = Assam.getNewDirection(currentDirection, rotation);
         } catch (IllegalArgumentException e) {
-            return currentAssam;  // 如果有非法的旋转角度，返回原状态
+            return currentAssam;  // If there is an illegal rotation Angle, return to the original state (如果有非法的旋转角度，返回原状态)
         }
 
-        // 构造新的Assam状态字符串并返回
+        // Constructs a new Assam status string and returns it (构造新的Assam状态字符串并返回)
         return currentAssam.substring(0, currentAssam.length() - 1) + newDirection;
         // FIXME: Task 9
     }
@@ -170,7 +172,7 @@ public class Marrakech {
      */
     public static boolean isPlacementValid(String gameState, String rug) {
 
-        // 从gameState中获取Assam的信息
+        // Get Assam information from gameState (从gameState中获取Assam的信息)
         Assam assam = null;
         String assamString = Assam.getContentBetweenAandB(gameState);
         if (assamString != null && assamString.length() >= 3) {
@@ -178,7 +180,7 @@ public class Marrakech {
             int y = Character.getNumericValue(assamString.charAt(1));
             char orientation = assamString.charAt(2);
 
-            // 使用提取的x和y坐标以及方向创建一个新的Assam对象
+            // Create a new Assam object using the extracted x and y coordinates and directions (使用提取的x和y坐标以及方向创建一个新的Assam对象)
             IntPair position = new IntPair(x, y);
             assam = new Assam(position, orientation);
         }
@@ -188,13 +190,13 @@ public class Marrakech {
         Board board = new Board();
         board.populateBoardFromString(boardString);
 
-        // 计算与Assam相邻的四个位置
+        // Calculate the 4 neighbour position (计算与Assam相邻的四个位置)
         IntPair northPos = new IntPair(assamPosition.getX(), assamPosition.getY() - 1);
         IntPair southPos = new IntPair(assamPosition.getX(), assamPosition.getY() + 1);
         IntPair westPos = new IntPair(assamPosition.getX() - 1, assamPosition.getY());
         IntPair eastPos = new IntPair(assamPosition.getX() + 1, assamPosition.getY());
 
-        // 提取rug的坐标
+        // get rug position(提取rug的坐标)
         int rugX1 = Character.getNumericValue(rug.charAt(3));
         int rugY1 = Character.getNumericValue(rug.charAt(4));
         int rugX2 = Character.getNumericValue(rug.charAt(5));
@@ -202,19 +204,19 @@ public class Marrakech {
         char rugColor = rug.charAt(0);
         int rugID = Integer.parseInt(rug.substring(1, 3));
 
-        // 提取rug的坐标并创建IntPair对象
+        // Extract the coordinates of the rug and create an IntPair object (提取rug的坐标并创建IntPair对象)
         IntPair rugPos1 = new IntPair(rugX1, rugY1);
         IntPair rugPos2 = new IntPair(rugX2, rugY2);
 
         Cell cell1 = board.getCell(rugPos1);
         Cell cell2 = board.getCell(rugPos2);
 
-        // 首先检查rug坐标是否与Assam坐标相同
+        // Check if rug position is equal to Assam's(首先检查rug坐标是否与Assam坐标相同)
         if (rugPos1.equals(assamPosition) || rugPos2.equals(assamPosition)) {
             return false;
         }
 
-        // 检查新的地毯的其中一个坐标是否与Assam相邻
+        // Check if new rug have position neighbour with Assam (检查新的地毯的其中一个坐标是否与Assam相邻)
         boolean isAdjacentToAssam = rugPos1.equals(northPos) || rugPos1.equals(southPos) ||
                 rugPos1.equals(westPos) || rugPos1.equals(eastPos) ||
                 rugPos2.equals(northPos) || rugPos2.equals(southPos) ||
@@ -226,7 +228,7 @@ public class Marrakech {
 
         if (cell1.getColor() == cell2.getColor() && cell1.getRugID() == cell2.getRugID()) {
             if (cell1.getColor() != 'n' || cell1.getRugID() != 0) {
-                return false; // 如果新地毯完全覆盖了一个已经放置的地毯，则返回false
+                return false; // If the new carpet completely covers an already placed carpet, return false (如果新地毯完全覆盖了一个已经放置的地毯，则返回false)
             }
         }
 
@@ -259,7 +261,7 @@ public class Marrakech {
             int y = Character.getNumericValue(assamString.charAt(1));
             char orientation = assamString.charAt(2);
 
-            // 使用提取的x和y坐标以及方向创建一个新的Assam对象
+            // use the new x,y and direction create a new Assam(使用提取的x和y坐标以及方向创建一个新的Assam对象)
             IntPair position = new IntPair(x, y);
             assam = new Assam(position, orientation);
         }
@@ -267,7 +269,7 @@ public class Marrakech {
         Cell cell = board.getCell(assamPosition);
         char rugColor = cell.getColor();
 
-        // 如果Assam所在的位置没有rug，返回0
+        // If no rug in Assam position, return 0(如果Assam所在的位置没有rug，返回0)
         if (rugColor == 'n') return 0;
 
         boolean[][] visited = new boolean[Board.BOARD_SIZE][Board.BOARD_SIZE];
@@ -290,7 +292,7 @@ public class Marrakech {
      * @return A char representing the winner of the game as described above.
      */
     public static char getWinner(String gameState) {
-        // Step 1: 提取玩家信息并创建玩家对象数组
+        // Step 1: Extract player information and create an array of player objects(提取玩家信息并创建玩家对象数组)
         String[] playerInfoArray = Player.extractPlayerInfo(gameState);
         Player[] players = new Player[4];
         for (int i = 0; i < 4; i++) {
@@ -298,7 +300,7 @@ public class Marrakech {
         }
 
         String boardString = Board.extractBoardPart(gameState);
-        // Step 2: 为每个玩家计算得分
+        // Step 2: Calculate the score for each player(为每个玩家计算得分)
         Board board = new Board();
         board.populateBoardFromString(boardString);
 

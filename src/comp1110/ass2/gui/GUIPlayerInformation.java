@@ -8,6 +8,7 @@ public class GUIPlayerInformation extends Group {
     MarrakechGame game;
     GUIPlayer[] guiPlayers;
 
+    // Constructor for GUIPlayerInformation
     GUIPlayerInformation(MarrakechGame game) {
         this.game = game;
 
@@ -18,6 +19,7 @@ public class GUIPlayerInformation extends Group {
             var guiPlayer = new GUIPlayer(game);
             guiPlayers[i] = guiPlayer;
 
+            // Set the layout positions for each GUIPlayer based on player index
             guiPlayer.setLayoutX((i % 2) * 180 + 200);
             guiPlayer.setLayoutY(40 +(i / 2) * 130 + 50);
         }
@@ -25,6 +27,7 @@ public class GUIPlayerInformation extends Group {
         this.getChildren().addAll(guiPlayers);
     }
 
+    // Set player information for each GUIPlayer
     void setPlayers() {
         var len = game.players.length;
         for (int i = 0; i < guiPlayers.length; i++) {
@@ -36,6 +39,7 @@ public class GUIPlayerInformation extends Group {
         }
     }
 
+    // Update the visual representation of player information
     void update() {
         for (GUIPlayer guiPlayer : guiPlayers) {
             guiPlayer.update();

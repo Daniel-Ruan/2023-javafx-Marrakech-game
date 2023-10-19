@@ -9,6 +9,7 @@ public class GUIMarrakech extends Group {
     GUIBoard guiBoard;
     GUIPlayerInformation guiPlayerInformation;
 
+    // Create a graphical board to represent the game state
     GUIMarrakech(MarrakechGame game) {
         this.game = game;
 
@@ -17,6 +18,7 @@ public class GUIMarrakech extends Group {
         guiBoard.setLayoutY(50);
         this.getChildren().add(guiBoard);
 
+        // Create an interface for displaying player information
         guiPlayerInformation = new GUIPlayerInformation(game);
         guiPlayerInformation.setPlayers();
         guiPlayerInformation.setLayoutX(600);
@@ -24,6 +26,7 @@ public class GUIMarrakech extends Group {
         this.getChildren().add(guiPlayerInformation);
     }
 
+    // Update the GUI components with the current game state
     void update() {
         guiPlayerInformation.update();
         guiBoard.update();

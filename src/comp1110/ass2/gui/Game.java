@@ -5,21 +5,23 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.*;
-import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Game extends Application {
-
+    // Define the main application class for the game
     private final Group root = new Group();
     private Button restartButton;
     private final Group gameStatusGroup = new Group();
     private final Group boardGroup = new Group();
     private final Object lock = new Object();
+    // Define various properties for the game interface
     private static final int WINDOW_WIDTH = 1200;
     private static final int WINDOW_HEIGHT = 700;
     private static final int TILE_SIZE = 80;
@@ -29,6 +31,7 @@ public class Game extends Application {
     private static final int CELL_ID_TEXT_SIZE = 15;
     private static final int TRIANGLE_HEIGHT = 30;
     private static final char[] PLAYER_COLORS = {'c', 'y', 'p', 'r'};  // Declare it as a class constant.
+    // Define constants for game window dimensions and UI elements
 
 
     GUIMarrakech guiMarrakech;
@@ -42,7 +45,7 @@ public class Game extends Application {
     private boolean isTurnedAssam;
     private boolean hasMoved;
     private boolean hasPlacedRug;
-
+    // Declare game-related objects and variables
     private Color getColorFromChar(char colorChar) {
         Color color;
         switch (colorChar) {
@@ -67,16 +70,17 @@ public class Game extends Application {
         }
         return color;
     }
-    // 示例检查方法
+    // Convert a character representing a color to a JavaFX Color object(示例检查方法)
     @Override
     public void start(Stage stage) throws Exception {
+        // Start the game application
         // FIXME Task 7 and 15
         Scene scene = new Scene(this.root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         restartButton = new Button("Restart Game");
-        restartButton.setOnAction(e -> initializeGame()); // 当点击此按钮时, 重新初始化游戏
+        restartButton.setOnAction(e -> initializeGame()); // reinitialize the game when click this button(当点击此按钮时, 重新初始化游戏)
 
-        // 使用 Group 手动定位按钮到屏幕的右下角
+        // Use Group to manually position the button to the lower right corner of the screen(使用 Group 手动定位按钮到屏幕的右下角)
         restartButton.setTranslateX(WINDOW_WIDTH - restartButton.getWidth() - 150);
         restartButton.setTranslateY(WINDOW_HEIGHT - restartButton.getHeight() - 50);
         restartButton.setStyle("-fx-background-color: #00fbff; -fx-font-size: 12pt; -fx-padding: 10px 20px;");
@@ -204,6 +208,7 @@ public class Game extends Application {
     }
 
     private void initializeGame() {
+        // Initialize the game and display the player selection interface
         GUISellectPlayerInterface selectPlayerInterface = new GUISellectPlayerInterface(playerCount -> {
             game = new MarrakechGame(playerCount);
             GUIMainGame mainGame = new GUIMainGame(game, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -254,9 +259,9 @@ public class Game extends Application {
     }
 
     private void updateBoardStatusInGameGroup(javafx.scene.layout.VBox box) {
-        String boardString = board.toBoardString();  // 获取棋盘的字符串表示
+        String boardString = board.toBoardString();  // Gets a string representation of the checkerboard(获取棋盘的字符串表示)
 
-        javafx.scene.control.Label boardLabel = new javafx.scene.control.Label("Board: " + boardString);  // 使用该字符串更新标签
+        javafx.scene.control.Label boardLabel = new javafx.scene.control.Label("Board: " + boardString);  // update the tag(使用该字符串更新标签)
         box.getChildren().add(boardLabel);
     }
 
@@ -284,9 +289,9 @@ public class Game extends Application {
         arc.setCenterY(centerY);
         arc.setRadiusX(radius);
         arc.setRadiusY(radius);
-        arc.setStartAngle(arcStart);  // 从3点钟方向开始
-        arc.setLength(arcEnd);  // 使用传入的arcLength值
-        arc.setType(ArcType.OPEN);  // 仅绘制轮廓，不填充
+        arc.setStartAngle(arcStart);  // Start at 3 o 'clock(从3点钟方向开始)
+        arc.setLength(arcEnd);  // Use the arcLength value passed in(使用传入的arcLength值)
+        arc.setType(ArcType.OPEN);  //  Create outline,no fill(仅绘制轮廓，不填充)
         arc.setStroke(Color.BLACK);
         arc.setStrokeWidth(2);
         arc.setFill(Color.TRANSPARENT);
@@ -294,68 +299,68 @@ public class Game extends Application {
     }
 
     private void drawBoardCircles(Group boardGroup, double boardOffsetX, double boardOffsetY) {
-        // 在(0, 0)和(0, 1)之间的上边缘绘制半圆
+        // Draw a half circle at the top edge between (0, 0) and (0, 1) - 在(0, 0)和(0, 1)之间的上边缘绘制半圆
         double halfCircleCenterX = boardOffsetX + CELL_SIDE_LENGTH;
         double halfCircleCenterY = boardOffsetY;
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 0, 180);
 
-        // 在(0, 2)和(0, 3)之间的上边缘绘制半圆
+        // Draw a half circle at the top edge between (0, 2) and (0, 3) - 在(0, 2)和(0, 3)之间的上边缘绘制半圆
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 0, 180);
 
-        // 在(0, 4)和(0, 5)之间的上边缘绘制半圆
+        // Draw a half circle at the top edge between (0, 4) and (0, 5) - 在(0, 4)和(0, 5)之间的上边缘绘制半圆
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 0, 180);
 
-        // 在(1, 7)和(2, 7)之间的下边缘绘制半圆
+        // Draw a half circle at the down edge between (1, 7) and (2, 7) - 在(1, 7)和(2, 7)之间的下边缘绘制半圆
         halfCircleCenterX = boardOffsetX + CELL_SIDE_LENGTH * 6.0; // Start from the middle of (1,7) and (2,7)
         halfCircleCenterY = boardOffsetY + CELL_SIDE_NUMBER * CELL_SIDE_LENGTH;  // Move it to the bottom edge
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 180, 180);
 
-        // 在(3, 7)和(4, 7)之间的下边缘绘制半圆
+        // Draw a half circle at the down edge between (3, 7) and (4, 7) - 在(3, 7)和(4, 7)之间的下边缘绘制半圆
         halfCircleCenterX -= CELL_SIDE_LENGTH * 2;  // Move to the previous two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 180, 180);
 
-        // 在(5, 7)和(6, 7)之间的下边缘绘制半圆
+        // Draw a half circle at the down edge between (5, 7) and (6, 7) - 在(5, 7)和(6, 7)之间的下边缘绘制半圆
         halfCircleCenterX -= CELL_SIDE_LENGTH * 2;  // Move to the previous two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 180, 180);
 
-        // 左边缘的半圆绘制
+        // The left part of the half circle (左边缘的半圆绘制)
 
-        // 在(0, 1)和(1, 1)之间的左边缘绘制半圆
+        // Draw a half circle at the left edge between (0, 1) and (1, 1) - 在(0, 1)和(1, 1)之间的左边缘绘制半圆
         halfCircleCenterX = boardOffsetX;
         halfCircleCenterY = boardOffsetY + CELL_SIDE_LENGTH * 1.0;  // 1.5 represents the middle between two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 180);
 
-        // 在(0, 3)和(1, 3)之间的左边缘绘制半圆
+        // Draw a half circle at the left edge between (0, 3) and (1, 3) - 在(0, 3)和(1, 3)之间的左边缘绘制半圆
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 180);
 
-        // 在(0, 5)和(1, 5)之间的左边缘绘制半圆
+        // Draw a half circle at the left edge between (0, 5) and (1, 5) - 在(0, 5)和(1, 5)之间的左边缘绘制半圆
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 180);
 
-        // 在(6, 1)和(7, 1)之间的右边缘绘制半圆
+        // Draw a half circle at the right edge between (6, 1) and (7, 1) - 在(6, 1)和(7, 1)之间的右边缘绘制半圆
         halfCircleCenterX = boardOffsetX + CELL_SIDE_LENGTH * 7;  // Move to the rightmost edge
         halfCircleCenterY = boardOffsetY + CELL_SIDE_LENGTH * 2.0;  // Reset the Y position
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 180);
 
-        // 在(6, 3)和(7, 3)之间的右边缘绘制半圆
+        // Draw a half circle at the right edge between (6, 3) and (7, 3) - 在(6, 3)和(7, 3)之间的右边缘绘制半圆
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 180);
 
-        // 在(6, 5)和(7, 5)之间的右边缘绘制半圆
+        // Draw a half circle at the right edge between (6, 5) and (7, 5) - 在(6, 5)和(7, 5)之间的右边缘绘制半圆
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 180);
 
-        // 在Board的右上角为圆心绘制270度的圆
+        // Draw a 270 degree circle  with the top right corner of the Board as the center (在Board的右上角为圆心绘制270度的圆)
         double arcCenterX = boardOffsetX + CELL_SIDE_LENGTH * CELL_SIDE_NUMBER;
         double arcCenterY = boardOffsetY;
         drawArc(boardGroup, arcCenterX, arcCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 270);
 
-        // 在Board的左下角为圆心绘制270度的圆
+        // Draw a 270 degree circle  with the lower left corner of the Board as the center (在Board的左下角为圆心绘制270度的圆)
         arcCenterX = boardOffsetX;
         arcCenterY = boardOffsetY + CELL_SIDE_LENGTH * CELL_SIDE_NUMBER;
         drawArc(boardGroup, arcCenterX, arcCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 270);
@@ -399,10 +404,10 @@ public class Game extends Application {
                 }
             }
             drawBoardCircles(boardGroup, boardOffsetX, boardOffsetY);
-            root.getChildren().add(boardGroup); // 添加boardGroup到root
+            root.getChildren().add(boardGroup); // Add boardGroup to root(添加boardGroup到root)
         }
 
-        // 绘制Assam
+        // Draw Assam(绘制Assam)
         if (assam != null) {
             IntPair pos = assam.getPosition();
             char orientation = assam.getOrientation();
@@ -465,15 +470,15 @@ public class Game extends Application {
     private String generateGameState() {
         StringBuilder gameState = new StringBuilder();
 
-        // 添加玩家信息
+        // Add player info (添加玩家信息)
         for (Player player : players) {
             gameState.append(player.toPlayerString());
         }
 
-        // 添加Assam信息
+        // Add Assam info (添加Assam信息)
         gameState.append(assam.toAssamString());
 
-        // 添加棋盘信息
+        // Add board info (添加棋盘信息)
         gameState.append(board.toBoardString());
 
         return gameState.toString();

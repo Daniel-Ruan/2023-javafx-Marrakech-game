@@ -63,23 +63,25 @@ public class Assam {
     public int getAngle() {
         return angle;
     }
+    // Change the angle by the given value, if it's a valid rotation
     public void changeAngle(int a) {
         int proposedAngle = this.angle + a;
 
         if (isValidRotation(proposedAngle)) {
-            this.angle = proposedAngle % 360;  // 确保angle值在[0, 360)范围内
+            this.angle = proposedAngle % 360;  // // Ensure the angle value is in [0, 360) (确保angle值在[0, 360)范围内)
         } else {
             this.angle = orientationToDegrees(orientation);
         }
     }
 
+    // Check if the proposed angle is a valid rotation
     public boolean isValidRotation(int proposedAngle) {
         int difference = (proposedAngle - orientationToDegrees(orientation) + 360) % 360;
         return difference == 0 || difference == 90 || difference == 270;
     }
 
 
-
+    // Update the orientation based on the current angle
     public void updateOrientationFromAngle() {
         // Normalize angle to [0, 360) range
         int normalizedAngle = ((angle % 360) + 360) % 360;
@@ -95,6 +97,7 @@ public class Assam {
         }
     }
 
+    // Check if the current angle is valid
     public boolean isCurrentAngleValid() {
         return isValidRotation(this.angle);
     }
@@ -113,6 +116,7 @@ public class Assam {
         return new Assam(new IntPair(x, y), orientation);
     }
 
+    // Convert orientation to degrees (0, 90, 180, 270)
     public static int orientationToDegrees(char orientation) {
         switch (orientation) {
             case 'N':
@@ -128,17 +132,19 @@ public class Assam {
         }
     }
 
+    // Extract content between 'A' and 'B' from a string
     public static String getContentBetweenAandB(String input) {
         int indexA = input.indexOf('A');
         int indexB = input.indexOf('B');
 
         if (indexA == -1 || indexB == -1 || indexA >= indexB) {
-            return "";  // 如果找不到'A'或'B'，或者'A'在'B'之后，返回""
+            return "";  // Return an empty string if 'A' or 'B' is not found or if 'A' comes after 'B'(如果找不到'A'或'B'，或者'A'在'B'之后，返回"")
         }
 
         return input.substring(indexA + 1, indexB);
     }
 
+    // Get the new direction after a rotation
     public static char getNewDirection(char currentDirection, int rotation) {
         if (rotation == 90) {
             return RIGHT_ROTATION_MAP.getOrDefault(currentDirection, currentDirection);
@@ -147,10 +153,11 @@ public class Assam {
         } else if (rotation == 0) {
             return currentDirection;
         } else {
-            // 非法的旋转角度
+            // Invalid rotation angle (非法的旋转角度)
             throw new IllegalArgumentException("Invalid rotation: " + rotation);
         }
     }
+    // Set Assam's position, orientation, and angle from a string
     public void setAssam(String assamString) {
         int x = Character.getNumericValue(assamString.charAt(0));
         int y = Character.getNumericValue(assamString.charAt(1));
@@ -160,7 +167,7 @@ public class Assam {
         setAngle(orientation);
     }
 
-
+    // Rotate Assam by the given degree
     public void rotate(int degree) {
         this.orientation = getNewDirection(this.orientation, degree);
     }

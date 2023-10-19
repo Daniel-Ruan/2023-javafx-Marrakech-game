@@ -65,26 +65,29 @@
             this.isActive = active;
         }
 
+        //Calculate the amount of dirhams that can be afforded
         public int canAfford(int x) {
             if (this.dirhams >= x) {
-                this.dirhams -= x;  // 扣除费用
-                return x;  // 返回全额支付的金额
+                this.dirhams -= x;  // Deduct the cost (扣除费用)
+                return x;  // Return the full paid amount (返回全额支付的金额)
             } else {
-                int actualPaidAmount = this.dirhams;  // 保存实际支付的金额
-                this.dirhams = 0;  // 清空玩家的货币
-                return actualPaidAmount;  // 返回实际支付的金额
+                int actualPaidAmount = this.dirhams;  // Store the actual paid amount (保存实际支付的金额)
+                this.dirhams = 0;  // Clear the player's currency (清空玩家的货币)
+                return actualPaidAmount;  // Return the actual paid amount (返回实际支付的金额)
             }
         }
 
+        // Add dirhams to the player's account
         public void addDirhams(int amount) {
-            // 判断输入的金额是否为正整数
+            // Check if the amount entered is a positive integer(判断输入的金额是否为正整数)
             if (amount >= 0) {
-                this.dirhams += amount;  // 增加dirhams的数量
+                this.dirhams += amount;  // Increase the dirhams count (增加dirhams的数量)
             } else {
-                System.err.println("Invalid amount. Amount should be a positive integer.");  // 输出错误信息
+                System.err.println("Invalid amount. Amount should be a positive integer.");  // // Output an error message for invalid input (输出错误信息)
             }
         }
 
+        // Set the player's attributes from a player string
         public void setPlayer(String playerString) {
 
             int newDirhams = Integer.parseInt(playerString.substring(2, 5));
@@ -118,6 +121,7 @@
             //create a new object 'Player', use the info before to initiate the game condition.
         }
 
+        // Check if the game has ended
         public static boolean hasGameEnded(String currentGame) {
             String[] playerInfoArray = extractPlayerInfo(currentGame);
             boolean allRugsPlaced = true;

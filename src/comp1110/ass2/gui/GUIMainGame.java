@@ -1,14 +1,10 @@
 package comp1110.ass2.gui;
-import comp1110.ass2.*;
-import javafx.application.Application;
+
+import comp1110.ass2.Cell;
+import comp1110.ass2.Marrakech;
+import comp1110.ass2.MarrakechGame;
+import comp1110.ass2.Rug;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.shape.*;
-import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font;
-import javafx.scene.paint.Color;
 
 public class GUIMainGame extends Group {
 
@@ -22,15 +18,16 @@ public class GUIMainGame extends Group {
         guiMarrakech.update();
         this.getChildren().add(guiMarrakech);
 
+        // Handle scrolling for rotating the view
         this.setOnScroll(event -> {
-            if (event.getDeltaY() > 0) { // 鼠标向前滚动
+            if (event.getDeltaY() > 0) { // Scroll Up (鼠标向前滚动)
                 if (game.phase == 0) {
                     game.assam.changeAngle(-90);
                     guiMarrakech.guiBoard.update();
                 } else if (game.phase == 2) {
                     guiMarrakech.guiBoard.rotateHighLightDegree(-90);
                 }
-            } else if (event.getDeltaY() < 0) { // 鼠标向后滚动
+            } else if (event.getDeltaY() < 0) { // Scroll Down (鼠标向后滚动)
                 if (game.phase == 0) {
                     game.assam.changeAngle(90);
                     guiMarrakech.guiBoard.update();

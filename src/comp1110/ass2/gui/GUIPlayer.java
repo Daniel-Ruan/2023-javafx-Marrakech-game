@@ -19,6 +19,7 @@ public class GUIPlayer extends Group {
 //    private Text scoreText;
     Player player;
 
+    // Set the player for this GUIPlayer
     void setPlayer(Player player) {
         this.player = player;
         var javaColor = player == null ? Color.GRAY : GameTools.getColor(player.getColor());
@@ -30,6 +31,7 @@ public class GUIPlayer extends Group {
 //        scoreText.setText("score: ");
     }
 
+    // Update the GUIPlayer's display
     void update() {
         if (player != null) {
             coinText.setText("dollars: " + player.getDirhams());
@@ -44,6 +46,7 @@ public class GUIPlayer extends Group {
         circle.setVisible(currentPlayer == player);
     }
 
+    // Constructor for GUIPlayer
     GUIPlayer(MarrakechGame game) {
         this.game = game;
 
