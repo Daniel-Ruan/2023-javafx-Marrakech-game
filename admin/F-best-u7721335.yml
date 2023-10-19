@@ -41,7 +41,7 @@ declaration: >-
 # you want to just submit classes):
 method:
    - testRotate()
-   - https://gitlab.cecs.anu.edu.au/u7723366/comp1110-ass2/-/blob/main/admin/F-best-u7721335.yml#L7-17
+   - https://gitlab.cecs.anu.edu.au/u7723366/comp1110-ass2/-/blob/main/tests/comp1110/ass2/JUnitTests/RotationTest.java#L7-17
 # sign *your* name and uid here
 name: Kechun Ma
 uid: u7721335
