@@ -49,7 +49,7 @@ The given code is a unit test for the `Rug` class, specifically focusing on the 
 **Advantages:**
 
 1. **Modularity**: The code separates the setup from the actual test, making it cleaner and more modular.
-2. **Clarity**: The use of `@BeforeEach` to set up common preconditions makes the test method(s) cleaner and easier to understand.
+2. **Clarity**: The use of `@BeforeEach` to set up common preconditions makes the test method cleaner and easier to understand.
 
 **Disadvantages:**
 

@@ -29,6 +29,9 @@ Everyone: complete the D2D test task together - meeting 15:30 - 17：00 26 Septe
 
 ## Week 9
 
+Everyone: complete the D2D test task together. the instruction of game.jar is given below:
+java --module-path /Users/apple/Library/Java/JavaFX/javafx-sdk-17.0.8/lib --add-modules=javafx.controls,javafx.fxml,javafx.media -jar /Users/apple/IdeaProjects/comp1110-ass2/out/artifacts/game/game.jar
+
 ## Week 10
 
 ## Week 11
