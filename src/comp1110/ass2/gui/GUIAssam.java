@@ -48,3 +48,5 @@ public class GUIAssam extends Group {
         circle.setFill(javaColor);// Set the circle's fill color to the player's color
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations was jointly completed by Kechun Ma.

@@ -73,3 +73,5 @@ public class Rug {
         return String.format("%s%d%d%d%d", cell1RugString, position1.getX(),position1.getY(), position2.getX(), position2.getY());
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

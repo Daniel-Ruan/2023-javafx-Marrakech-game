@@ -1,4 +1,5 @@
 package comp1110.ass2.gui;
+
 import comp1110.ass2.Cell;
 import comp1110.ass2.MarrakechGame;
 import javafx.scene.Group;
@@ -7,7 +8,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.Objects;
-
 public class GUICell extends Group {
 
     MarrakechGame game;
@@ -65,3 +65,5 @@ public class GUICell extends Group {
     }
 
 }
+
+// This class was written by Huizhe Ruan. The code annotations was jointly completed by Kechun Ma.

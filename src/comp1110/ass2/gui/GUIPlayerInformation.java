@@ -2,7 +2,6 @@ package comp1110.ass2.gui;
 
 import comp1110.ass2.MarrakechGame;
 import javafx.scene.Group;
-
 public class GUIPlayerInformation extends Group {
 
     MarrakechGame game;
@@ -46,3 +45,5 @@ public class GUIPlayerInformation extends Group {
         }
     }
 }
+
+// This class was written by Huizhe Ruan.  The code annotations was jointly completed by Kechun Ma.

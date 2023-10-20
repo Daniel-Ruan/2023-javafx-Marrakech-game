@@ -134,7 +134,7 @@ public class MarrakechGame {
         String rugStr = Rug.toRugString(rug);
         // Attempt to make the placement
         String resultGameString = Marrakech.makePlacement(currentGame, rugStr);
-        System.out.println("resultGameString" + resultGameString);
+//        System.out.println("resultGameString" + resultGameString);
         updateGameState(resultGameString);
     }
 
@@ -219,6 +219,8 @@ public class MarrakechGame {
         for (int i = 0; i < players.length && i < playerInfoArray.length; i++) {
             players[i].setPlayer(playerInfoArray[i]);
         }
-        System.out.println("updateGameState" + generateGameState());
+//        System.out.println("updateGameState" + generateGameState());
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

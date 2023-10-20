@@ -36,9 +36,9 @@ code:
 
 # I wish to submit the following classes as entirely my own (remove this if
 # you want to just submit methods):
-#class:
-#   -
-#   -
+class:
+  - populateBoardFromString(String boardString)
+  - https://gitlab.cecs.anu.edu.au/u7723366/comp1110-ass2/-/blob/main/src/comp1110/ass2/MarrakechGame.java
 
 # I wish to submit the following methods as entirely my own (remove this if
 # you want to just submit classes):

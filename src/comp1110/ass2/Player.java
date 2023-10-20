@@ -187,3 +187,5 @@
             //isActive ? 'i' : 'o'：This is a conditional expression that inserts the characters' i '(if active) or' o '(if inactive) based on the player's activity state (isActive).
         }
     }
+
+    // This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

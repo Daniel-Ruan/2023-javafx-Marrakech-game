@@ -32,3 +32,4 @@ public class GUIMarrakech extends Group {
         guiBoard.update();
     }
 }
+// This class was written by Huizhe Ruan.  The code annotations was jointly completed by Kechun Ma.

@@ -45,6 +45,9 @@ public class GUIMainGame extends Group {
 
                 if (game.assam.isCurrentAngleValid()) {
                     game.assam.updateOrientationFromAngle();
+                    String playerMoveTips = "Click again to move.";
+                    GUIAlertInformation alertplayerMoveTips = new GUIAlertInformation(playerMoveTips, windowWidth, windowHeight);
+                    this.getChildren().add(alertplayerMoveTips);
                     game.phase = 1;
                 }
             } else if (game.phase == 1) {
@@ -58,7 +61,6 @@ public class GUIMainGame extends Group {
                 var color = game.board.getCell(game.assam.getPosition()).getColor();
                 var payer = game.getPlayer(color);
                 int dollar = Marrakech.getPaymentAmount(game.generateGameState());
-//                System.out.println("Pay " + dollar);
                 if (payer != null && payer != currentPlayer) {
                     if (payer.isActive()) {
                         game.payTo(currentPlayer, dollar);
@@ -75,7 +77,6 @@ public class GUIMainGame extends Group {
                     game.turnNext();
                 } else {
                     game.phase =2;
-//                    System.out.println("finish phase 1 click Player: " + game.currentPlayerIndex);
                 }
             } else if (game.phase == 2) {
                 var guiCells = guiMarrakech.guiBoard.getHighLightCells();
@@ -90,10 +91,9 @@ public class GUIMainGame extends Group {
                         game.phase = 0;
                         game.turnNext();
                     } else {
-                        String alertResetInformation = "Failed to place, please re-place in appropriate";
+                        String alertResetInformation = "Failed to place, please re-place";
                         GUIAlertInformation alertPlayerTips = new GUIAlertInformation(alertResetInformation, windowWidth, windowHeight);
                         this.getChildren().add(alertPlayerTips);
-//                        System.out.println("Placement failure " + game.generateGameState());
                     }
                 }
             }else {
@@ -101,7 +101,7 @@ public class GUIMainGame extends Group {
                 String winnerInformation = "Game over, winner is " + winner +" color player.";
                 GUIAlertInformation alertwinnerInformation = new GUIAlertInformation(winnerInformation, windowWidth, windowHeight);
                 this.getChildren().add(alertwinnerInformation);
-//                System.out.println("game over, winner is " + winner +" color player");
+                System.out.println("Game over, winner is " + winner +" color player");
             }
             guiMarrakech.update();
         });
@@ -110,3 +110,5 @@ public class GUIMainGame extends Group {
 
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

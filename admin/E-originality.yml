@@ -30,10 +30,10 @@ declaration: >-
 #
 # Add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
-#code:
-#  - comment:
-#    url:
-#    licence:
+code:
+  - comment: Used JavaFX for GUI elements like shapes, text, and transformations
+    url: https://openjfx.io/
+    licence: GPL v2 with Classpath Exception
 
 # Use this to list any assets (artwork, sound, etc) that you used.
 # Provide a comment explaining your use of that asset and the URL

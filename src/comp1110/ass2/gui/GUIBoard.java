@@ -1,6 +1,5 @@
 package comp1110.ass2.gui;
 
-
 import comp1110.ass2.IntPair;
 import comp1110.ass2.MarrakechGame;
 import javafx.scene.Group;
@@ -59,7 +58,6 @@ public class GUIBoard extends Group {
     }
     // Update the GUI board based on the game state
     void update() {
-            System.out.println("board update");
         for (int col = 0; col < Board.BOARD_SIZE; col++) {
             for (int row = 0; row < Board.BOARD_SIZE; row++) {
                 guiCells[col][row].update();
@@ -132,3 +130,5 @@ public class GUIBoard extends Group {
         }
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

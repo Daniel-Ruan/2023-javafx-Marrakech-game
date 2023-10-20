@@ -17,7 +17,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 public class Viewer extends Application {
 
     private static final int VIEWER_WIDTH = 1200;
@@ -277,3 +276,5 @@ public class Viewer extends Application {
         primaryStage.show();
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

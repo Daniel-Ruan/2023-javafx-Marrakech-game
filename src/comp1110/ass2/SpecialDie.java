@@ -35,3 +35,4 @@ public class SpecialDie {
         return FACES[index];
     }
 }
+// This class was written by Huizhe Ruan.

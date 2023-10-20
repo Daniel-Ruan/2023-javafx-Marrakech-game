@@ -1,4 +1,5 @@
 package comp1110.ass2.gui;
+
 import javafx.animation.PauseTransition;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
@@ -45,3 +46,5 @@ public class GUIAlertInformation extends Group {
         displayedMessagesCount++;
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.

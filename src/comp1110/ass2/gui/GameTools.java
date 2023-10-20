@@ -18,3 +18,5 @@ public class GameTools {
         return Color.web("#dfe6e9", 0);
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations was jointly completed by Kechun Ma.

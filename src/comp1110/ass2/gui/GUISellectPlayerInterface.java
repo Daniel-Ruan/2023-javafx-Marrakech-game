@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.util.function.Consumer;
-
 public class GUISellectPlayerInterface extends Group {
     private static final double WINDOW_WIDTH = 800;  // Window width, can adjust
     private static final double WINDOW_HEIGHT = 600;  // Window height
@@ -34,3 +33,5 @@ public class GUISellectPlayerInterface extends Group {
         this.getChildren().add(vbox);
     }
 }
+
+// This class was written by Huizhe Ruan. The code annotations were jointly completed by Anbo Wu and Kechun Ma.
