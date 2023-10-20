@@ -70,7 +70,7 @@ public class Game extends Application {
         }
         return color;
     }
-    // Convert a character representing a color to a JavaFX Color object(示例检查方法)
+    // Convert a character representing a color to a JavaFX Color object
     @Override
     public void start(Stage stage) throws Exception {
         // Start the game application
@@ -78,9 +78,9 @@ public class Game extends Application {
         Scene scene = new Scene(this.root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         restartButton = new Button("Restart Game");
-        restartButton.setOnAction(e -> initializeGame()); // reinitialize the game when click this button(当点击此按钮时, 重新初始化游戏)
+        restartButton.setOnAction(e -> initializeGame()); // reinitialize the game when click this button
 
-        // Use Group to manually position the button to the lower right corner of the screen(使用 Group 手动定位按钮到屏幕的右下角)
+        // Use Group to manually position the button to the lower right corner of the screen
         restartButton.setTranslateX(WINDOW_WIDTH - restartButton.getWidth() - 150);
         restartButton.setTranslateY(WINDOW_HEIGHT - restartButton.getHeight() - 50);
         restartButton.setStyle("-fx-background-color: #00fbff; -fx-font-size: 12pt; -fx-padding: 10px 20px;");
@@ -91,120 +91,6 @@ public class Game extends Application {
         stage.setScene(scene);
         stage.setTitle("Marrakech game");
         stage.show();
-
-
-//        GUISellectPlayerInterface selectPlayerInterface = new GUISellectPlayerInterface(playerCount -> {
-//            game = new MarrakechGame(playerCount);
-//
-//            GUIMainGame mainGame = new GUIMainGame(game, WINDOW_WIDTH, WINDOW_HEIGHT);
-//            root.getChildren().clear();  // 清除之前的界面
-//            root.getChildren().add(mainGame);
-//        });
-//
-//        root.getChildren().add(selectPlayerInterface);
-
-
-//        game = new MarrakechGame(4);
-//
-//        GUIMainGame mainGame = new GUIMainGame(game, WINDOW_WIDTH, WINDOW_HEIGHT);
-//        root.getChildren().add(mainGame);
-
-
-
-//        guiMarrakech = new GUIMarrakech(game);
-//        guiMarrakech.update();
-//        root.getChildren().add(guiMarrakech);
-//
-//        scene.setOnMouseClicked(event -> {
-//            if (game.phase == 0) {
-//                if (Marrakech.isGameOver(game.generateGameState())) {
-//                    game.phase = -1;
-//                    return;
-//                }
-//
-//                if (game.assam.isCurrentAngleValid()) {
-//                    game.assam.updateOrientationFromAngle();
-//                    game.phase = 1;
-//                }
-//            } else if (game.phase == 1) {
-//                var step = Marrakech.rollDie();
-//                String alertMoveInformation = "Current player moves " + step + " steps.";
-//                game.moveAssamInGame(step);
-//                GUIAlertInformation alertStep = new GUIAlertInformation(alertMoveInformation, WINDOW_WIDTH, WINDOW_HEIGHT);
-//                root.getChildren().add(alertStep);
-//
-//                var currentPlayer = game.players[game.currentPlayerIndex];
-//                var color = game.board.getCell(game.assam.getPosition()).getColor();
-//                var payer = game.getPlayer(color);
-//                int dollar = Marrakech.getPaymentAmount(game.generateGameState());
-////                System.out.println("Pay " + dollar);
-//                if (payer != null && payer != currentPlayer) {
-//                    if (payer.isActive()) {
-//                        game.payTo(currentPlayer, dollar);
-//                        payer.addDirhams(dollar);
-//                        String alertPaymentInformation = "player " + currentPlayer.getColor() + " paid " + dollar + " dirhams.";
-//                        GUIAlertInformation alertPayment = new GUIAlertInformation(alertPaymentInformation, WINDOW_WIDTH, WINDOW_HEIGHT);
-//                        root.getChildren().add(alertPayment);
-//
-//                    }
-//                }
-//                guiMarrakech.guiBoard.update();
-//                if (!currentPlayer.isActive()) {
-//                    game.phase =0;
-//                    game.turnNext();
-//                } else {
-//                    game.phase =2;
-////                    System.out.println("finish phase 1 click Player: " + game.currentPlayerIndex);
-//                }
-//            } else if (game.phase == 2) {
-//                var guiCells = guiMarrakech.guiBoard.getHighLightCells();
-//                if (guiCells.length == 2) {
-//                    var player = game.players[game.currentPlayerIndex];
-//                    var newCell1 = new Cell(guiCells[0].cell.getPosition(),player.getColor(), 15 - player.getRugs());
-//                    var newCell2 = new Cell(guiCells[1].cell.getPosition(),player.getColor(), 15 - player.getRugs());
-//                    var rug = new Rug(newCell1, newCell2);
-//
-//                    if (game.isPlacedAllowed(rug)) {
-//                        game.makePlacementInGame(rug);
-//                        game.phase = 0;
-//                        game.turnNext();
-//                    } else {
-//                        String alertResetInformation = "Failed to place, please re-place in appropriate";
-//                        GUIAlertInformation alertPlayerTips = new GUIAlertInformation(alertResetInformation, WINDOW_WIDTH, WINDOW_HEIGHT);
-//                        root.getChildren().add(alertPlayerTips);
-////                        System.out.println("Placement failure " + game.generateGameState());
-//                    }
-//                }
-//            }else {
-//                char winner = Marrakech.getWinner(game.generateGameState());
-//                String winnerInformation = "Game over, winner is " + winner +" color player.";
-//                GUIAlertInformation alertwinnerInformation = new GUIAlertInformation(winnerInformation, WINDOW_WIDTH, WINDOW_HEIGHT);
-//                root.getChildren().add(alertwinnerInformation);
-////                System.out.println("game over, winner is " + winner +" color player");
-//            }
-//            guiMarrakech.update();
-//        });
-//
-//        scene.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.RIGHT) { // 当按下右方向键时
-//                if (game.phase == 0) {
-//                    game.assam.changeAngle(90);
-//                    guiMarrakech.guiBoard.update();
-//                } else if (game.phase == 2) {
-//                    guiMarrakech.guiBoard.rotateHighLightDegree(90);
-//                }
-//            } else if (event.getCode() == KeyCode.LEFT) {
-//                if (game.phase == 0) {
-//                    game.assam.changeAngle(-90);
-//                    guiMarrakech.guiBoard.update();
-//                } else if (game.phase == 2) {
-//                    guiMarrakech.guiBoard.rotateHighLightDegree(-90);
-//                }
-//            }
-//            // 可以为其他方向键添加更多的操作，例如使用KeyCode.UP, KeyCode.DOWN, KeyCode.LEFT等
-//        });
-
-
     }
 
     private void initializeGame() {
@@ -222,35 +108,8 @@ public class Game extends Application {
         root.getChildren().add(selectPlayerInterface);
     }
 
-    //        scene.setOnScroll(event -> {
-//            if (game.phase == 0) {
-//                game.assam.rotate(90);
-//                guiMarrakech.guiBoard.update();
-//            } else if (game.phase == 2) {
-//                guiMarrakech.guiBoard.rotateHighLightDegree(90);
-//
-//            }
-//        });
-    //        showPlayerSelection();  // 显示玩家选择界面
 
-    private void showPlayerSelection() {
-//        javafx.scene.control.Button btn2 = new javafx.scene.control.Button("2 Players");
-//        btn2.setLayoutX(WINDOW_WIDTH/2 - 150);
-//        btn2.setLayoutY(WINDOW_HEIGHT/2);
-//        btn2.setOnAction(e -> startGame(2));
-//
-//        javafx.scene.control.Button btn3 = new javafx.scene.control.Button("3 Players");
-//        btn3.setLayoutX(WINDOW_WIDTH/2 - 50);
-//        btn3.setLayoutY(WINDOW_HEIGHT/2);
-//        btn3.setOnAction(e -> startGame(3));
-//
-//        javafx.scene.control.Button btn4 = new javafx.scene.control.Button("4 Players");
-//        btn4.setLayoutX(WINDOW_WIDTH/2 + 50);
-//        btn4.setLayoutY(WINDOW_HEIGHT/2);
-//        btn4.setOnAction(e -> startGame(4));
-//
-//        root.getChildren().addAll(btn2, btn3, btn4);
-    }
+    private void showPlayerSelection() {}
 
     private void updateAssamStatusInGameGroup(javafx.scene.layout.VBox box) {
         javafx.scene.control.Label assamLabel = new javafx.scene.control.Label(
@@ -259,9 +118,11 @@ public class Game extends Application {
     }
 
     private void updateBoardStatusInGameGroup(javafx.scene.layout.VBox box) {
-        String boardString = board.toBoardString();  // Gets a string representation of the checkerboard(获取棋盘的字符串表示)
+        String boardString = board.toBoardString();
+        // Gets a string representation of the checkerboard
 
-        javafx.scene.control.Label boardLabel = new javafx.scene.control.Label("Board: " + boardString);  // update the tag(使用该字符串更新标签)
+        javafx.scene.control.Label boardLabel = new javafx.scene.control.Label("Board: " + boardString);
+        // update the tag
         box.getChildren().add(boardLabel);
     }
 
@@ -289,9 +150,9 @@ public class Game extends Application {
         arc.setCenterY(centerY);
         arc.setRadiusX(radius);
         arc.setRadiusY(radius);
-        arc.setStartAngle(arcStart);  // Start at 3 o 'clock(从3点钟方向开始)
-        arc.setLength(arcEnd);  // Use the arcLength value passed in(使用传入的arcLength值)
-        arc.setType(ArcType.OPEN);  //  Create outline,no fill(仅绘制轮廓，不填充)
+        arc.setStartAngle(arcStart);  // Start at 3 o 'clock
+        arc.setLength(arcEnd);  // Use the arcLength value passed in
+        arc.setType(ArcType.OPEN);  //  Create outline,no fill
         arc.setStroke(Color.BLACK);
         arc.setStrokeWidth(2);
         arc.setFill(Color.TRANSPARENT);
@@ -299,68 +160,68 @@ public class Game extends Application {
     }
 
     private void drawBoardCircles(Group boardGroup, double boardOffsetX, double boardOffsetY) {
-        // Draw a half circle at the top edge between (0, 0) and (0, 1) - 在(0, 0)和(0, 1)之间的上边缘绘制半圆
+        // Draw a half circle at the top edge between (0, 0) and (0, 1)
         double halfCircleCenterX = boardOffsetX + CELL_SIDE_LENGTH;
         double halfCircleCenterY = boardOffsetY;
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 0, 180);
 
-        // Draw a half circle at the top edge between (0, 2) and (0, 3) - 在(0, 2)和(0, 3)之间的上边缘绘制半圆
+        // Draw a half circle at the top edge between (0, 2) and (0, 3)
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 0, 180);
 
-        // Draw a half circle at the top edge between (0, 4) and (0, 5) - 在(0, 4)和(0, 5)之间的上边缘绘制半圆
+        // Draw a half circle at the top edge between (0, 4) and (0, 5)
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         halfCircleCenterX += CELL_SIDE_LENGTH;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 0, 180);
 
-        // Draw a half circle at the down edge between (1, 7) and (2, 7) - 在(1, 7)和(2, 7)之间的下边缘绘制半圆
+        // Draw a half circle at the down edge between (1, 7) and (2, 7)
         halfCircleCenterX = boardOffsetX + CELL_SIDE_LENGTH * 6.0; // Start from the middle of (1,7) and (2,7)
         halfCircleCenterY = boardOffsetY + CELL_SIDE_NUMBER * CELL_SIDE_LENGTH;  // Move it to the bottom edge
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 180, 180);
 
-        // Draw a half circle at the down edge between (3, 7) and (4, 7) - 在(3, 7)和(4, 7)之间的下边缘绘制半圆
+        // Draw a half circle at the down edge between (3, 7) and (4, 7)
         halfCircleCenterX -= CELL_SIDE_LENGTH * 2;  // Move to the previous two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 180, 180);
 
-        // Draw a half circle at the down edge between (5, 7) and (6, 7) - 在(5, 7)和(6, 7)之间的下边缘绘制半圆
+        // Draw a half circle at the down edge between (5, 7) and (6, 7)
         halfCircleCenterX -= CELL_SIDE_LENGTH * 2;  // Move to the previous two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 180, 180);
 
-        // The left part of the half circle (左边缘的半圆绘制)
+        // The left part of the half circle
 
-        // Draw a half circle at the left edge between (0, 1) and (1, 1) - 在(0, 1)和(1, 1)之间的左边缘绘制半圆
+        // Draw a half circle at the left edge between (0, 1) and (1, 1)
         halfCircleCenterX = boardOffsetX;
         halfCircleCenterY = boardOffsetY + CELL_SIDE_LENGTH * 1.0;  // 1.5 represents the middle between two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 180);
 
-        // Draw a half circle at the left edge between (0, 3) and (1, 3) - 在(0, 3)和(1, 3)之间的左边缘绘制半圆
+        // Draw a half circle at the left edge between (0, 3) and (1, 3)
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 180);
 
-        // Draw a half circle at the left edge between (0, 5) and (1, 5) - 在(0, 5)和(1, 5)之间的左边缘绘制半圆
+        // Draw a half circle at the left edge between (0, 5) and (1, 5)
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 180);
 
-        // Draw a half circle at the right edge between (6, 1) and (7, 1) - 在(6, 1)和(7, 1)之间的右边缘绘制半圆
+        // Draw a half circle at the right edge between (6, 1) and (7, 1)
         halfCircleCenterX = boardOffsetX + CELL_SIDE_LENGTH * 7;  // Move to the rightmost edge
         halfCircleCenterY = boardOffsetY + CELL_SIDE_LENGTH * 2.0;  // Reset the Y position
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 180);
 
-        // Draw a half circle at the right edge between (6, 3) and (7, 3) - 在(6, 3)和(7, 3)之间的右边缘绘制半圆
+        // Draw a half circle at the right edge between (6, 3) and (7, 3)
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 180);
 
-        // Draw a half circle at the right edge between (6, 5) and (7, 5) - 在(6, 5)和(7, 5)之间的右边缘绘制半圆
+        // Draw a half circle at the right edge between (6, 5) and (7, 5)
         halfCircleCenterY += CELL_SIDE_LENGTH * 2;  // Move to the next two cells
         drawArc(boardGroup, halfCircleCenterX, halfCircleCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 180);
 
-        // Draw a 270 degree circle  with the top right corner of the Board as the center (在Board的右上角为圆心绘制270度的圆)
+        // Draw a 270 degree circle  with the top right corner of the Board as the center
         double arcCenterX = boardOffsetX + CELL_SIDE_LENGTH * CELL_SIDE_NUMBER;
         double arcCenterY = boardOffsetY;
         drawArc(boardGroup, arcCenterX, arcCenterY, 0.5 * CELL_SIDE_LENGTH, -90, 270);
 
-        // Draw a 270 degree circle  with the lower left corner of the Board as the center (在Board的左下角为圆心绘制270度的圆)
+        // Draw a 270 degree circle  with the lower left corner of the Board as the center
         arcCenterX = boardOffsetX;
         arcCenterY = boardOffsetY + CELL_SIDE_LENGTH * CELL_SIDE_NUMBER;
         drawArc(boardGroup, arcCenterX, arcCenterY, 0.5 * CELL_SIDE_LENGTH, 90, 270);
@@ -404,10 +265,10 @@ public class Game extends Application {
                 }
             }
             drawBoardCircles(boardGroup, boardOffsetX, boardOffsetY);
-            root.getChildren().add(boardGroup); // Add boardGroup to root(添加boardGroup到root)
+            root.getChildren().add(boardGroup); // Add boardGroup to root
         }
 
-        // Draw Assam(绘制Assam)
+        // Draw Assam
         if (assam != null) {
             IntPair pos = assam.getPosition();
             char orientation = assam.getOrientation();
@@ -449,104 +310,23 @@ public class Game extends Application {
     }
 
 
-//        private void displayInfo() {
-//
-//            javafx.scene.layout.VBox leftInfoBox = new javafx.scene.layout.VBox(10);
-//            leftInfoBox.setLayoutX(10);
-//            leftInfoBox.setLayoutY(10);
-//            updateGameStateInGameGroup(leftInfoBox);  // 新增的方法调用
-//            updateAssamStatusInGameGroup(leftInfoBox);
-//            updateBoardStatusInGameGroup(leftInfoBox);
-//            root.getChildren().add(leftInfoBox);
-//
-//            javafx.scene.layout.VBox playerInfoBox = new javafx.scene.layout.VBox(10);
-//            int totalPlayerInfoHeight = (players.length * 30) + (players.length - 1) * 10;
-//            playerInfoBox.setLayoutX(WINDOW_WIDTH - LABEL_WIDTH - 10);
-//            playerInfoBox.setLayoutY(WINDOW_HEIGHT - totalPlayerInfoHeight - 10);
-//            updatePlayerStatusInGameGroup(players, playerInfoBox);
-//            root.getChildren().add(playerInfoBox);
-//    }
-
     private String generateGameState() {
         StringBuilder gameState = new StringBuilder();
 
-        // Add player info (添加玩家信息)
+        // Add player info
         for (Player player : players) {
             gameState.append(player.toPlayerString());
         }
 
-        // Add Assam info (添加Assam信息)
+        // Add Assam info
         gameState.append(assam.toAssamString());
 
-        // Add board info (添加棋盘信息)
+        // Add board info
         gameState.append(board.toBoardString());
 
         return gameState.toString();
     }
 
-//    public void playGame() throws InterruptedException {
-//        while (!Marrakech.isGameOver(generateGameState())) {
-//            for (Player player : players) {
-//                isTurnedAssam = false;
-//                hasMoved = false;
-//                hasPlacedRug = false;
-//                if (player.isActive()) {
-//                    playerTurn(player);
-//                }
-//            }
-//        }
-//        char winner = Marrakech.getWinner(generateGameState());
-//        endGame(winner);
-//    }
-
-//    private void playerTurn(Player player) throws InterruptedException {
-//        synchronized (lock) {
-////            rotateAssam(player);
-//            while (!isTurnedAssam) {
-//                lock.wait();
-//            }
-//
-////            moveAssam(player);
-//            while (!hasMoved) {
-//                lock.wait();
-//            }
-//
-////            placeRug(player);
-//            while (!hasPlacedRug) {
-//                lock.wait();
-//            }
-//        }
-//    }
-
-//    private void rotateAssam(Player player) {
-//        // Logic for rotating Assam
-//        // Once done, set player's isTurnedAssam to true and notify
-//        synchronized (lock) {
-//            // ... logic ...
-//            isTurnedAssam = false;
-//            lock.notifyAll();
-//        }
-//    }
-
-//    private void moveAssam(Player player) {
-//        // Logic for moving Assam
-//        // Once done, set player's hasMoved to true and notify
-//        synchronized (lock) {
-//            // ... logic ...
-//            hasMoved = false;
-//            lock.notifyAll();
-//        }
-//    }
-
-//    private void placeRug(Player player) {
-//        // Logic for placing rug
-//        // Once done, set player's hasPlacedRug to true and notify
-//        synchronized (lock) {
-//            // ... logic ...
-//            hasPlacedRug = false;
-//            lock.notifyAll();
-//        }
-//    }
 
     private void endGame(char winner) {
         switch (winner) {
@@ -573,46 +353,19 @@ public class Game extends Application {
                 break;
         }
     }
-
-
-
-//    private void startGame(int numPlayers) {
-//        // private variable to store the number of players.
-//        root.getChildren().clear();
-//
-//        boardGroup.getChildren().clear();  // 清空boardGroup
-//        gameStatusGroup.getChildren().clear();  // 清空gameStatusGroup
-//
-//        this.players = new Player[4];  // 总是实例化四个玩家
-//
-//        for (int i = 0; i < 4; i++) {
-//            // 如果当前索引小于玩家数量，则设置isActive为true，否则为false
-//            boolean isActive = i < numPlayers;
-//            players[i] = new Player(PLAYER_COLORS[i], 30, 15, isActive);
-//        }
-//
-//        this.assam = new Assam(new IntPair(3, 3), 'N');
-//        this.board = new Board();
-//        initializeGame();
-//        startActualGame();
-//    }
-
-//    private void initializeGame() {
-//        displayInfo();
-//        drawBoard(this.board);  // 使用drawBoard绘制刚刚实例化的Board
-//
-//    }
-
-
-
-//    public void startActualGame() {
-//        try {
-//            playGame();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//            System.out.println("Game was interrupted!");
-//        }
-//    }
-
+    /**
+     * This method is responsible for handling the conclusion of the game.
+     * Based on the input character representing the winner or game state,
+     * it prints an appropriate message indicating the game's outcome.
+     *
+     * @param winner a character representing the game's result or the winner's color:
+     *               't' - Tie
+     *               'c' - Cyan player wins
+     *               'y' - Yellow player wins
+     *               'p' - Purple player wins
+     *               'r' - Red player wins
+     *               'n' - Game is ongoing
+     *               Any other character indicates an unexpected result.
+     */
 }
 

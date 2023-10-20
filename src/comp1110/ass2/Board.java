@@ -1,7 +1,7 @@
 package comp1110.ass2;
 
 public class Board {
-    public static final int BOARD_SIZE = 7; // Assuming the board is 7x7 (假设棋盘是 7x7)
+    public static final int BOARD_SIZE = 7; // Assuming the board is 7x7
     public Cell[][] board;
 
     public Board() {
@@ -9,12 +9,13 @@ public class Board {
         board = new Cell[BOARD_SIZE][BOARD_SIZE];
         for (int x = 0; x < BOARD_SIZE; x++) {
             for (int y = 0; y < BOARD_SIZE; y++) {
-                board[x][y] = new Cell(new IntPair(x, y), 'n', 0); // // Initialize as no rug (初始化为没有地毯)
+                board[x][y] = new Cell(new IntPair(x, y), 'n', 0);
+                // Initialize as no rug
             }
         }
     }
 
-    // Populate the board based on a string representation
+
     public void populateBoardFromString(String boardString) {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
@@ -23,6 +24,7 @@ public class Board {
                 char colorChar = cellString.charAt(0);
                 int rugID = Integer.parseInt(cellString.substring(1, 3));
                 board[row][col].setRug(colorChar, rugID);
+                // Populate the board based on a string representation
             }
         }
     }
@@ -32,7 +34,7 @@ public class Board {
         if (isValidPosition(position)) {
             board[position.getX()][position.getY()].setRug(color, rugID);
         } else {
-            // Handle out-of-bounds attempt (处理越界尝试)
+            // Handle out-of-bounds attempt
         }
     }
 
@@ -45,7 +47,7 @@ public class Board {
         }
     }
 
-    // Validate if a given position is within the board's boundaries (验证给定位置是否在棋盘范围内)
+    // Validate if a given position is within the board's boundaries
     private boolean isValidPosition(IntPair position) {
         return position.getX() >= 0 && position.getX() < BOARD_SIZE &&
                 position.getY() >= 0 && position.getY() < BOARD_SIZE;
@@ -78,10 +80,10 @@ public class Board {
     public int getRugCountForColor(char color) {
         int count = 0;
 
-        // Iterate through the board array (遍历board数组)
+        // Iterate through the board array
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                // If the current Cell's color matches the given color, increment the count (如果当前Cell的颜色与给定颜色相匹配，则增加计数)
+                // If the current Cell's color matches the given color, increment the count
                 if (board[i][j].getColor() == color) {
                     count++;
                 }
@@ -112,13 +114,13 @@ public class Board {
 
     // Extract the board part from a game string
     public static String extractBoardPart(String gameString) {
-        // Find the position of 'B' character (查找字符'B'的位置)
+        // Find the position of 'B' character
         int startPos = gameString.indexOf('B');
 
-        // If 'B' is not found, return an empty string or null (as needed) (如果没有找到'B'，返回一个空字符串或null（根据需要）)
+        // If 'B' is not found, return an empty string or null (as needed)
         if (startPos == -1) return "";
 
-        // Extract the substring starting from the position of 'B' + 1 (从该位置的下一个字符开始截取字符串到末尾)
+        // Extract the substring starting from the position of 'B' + 1
         return gameString.substring(startPos + 1);
     }
 
@@ -126,17 +128,13 @@ public class Board {
     public String toBoardString() {
         StringBuilder boardString = new StringBuilder("B");  // The string starts with 'B'(开头是 'B')
 
-        // Iterate through the board in column-major order (按照列优先的顺序遍历棋盘)
+        // Iterate through the board in column-major order
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 7; y++) {
                 boardString.append(board[x][y].toRugString());
-
-                // Utilize the Cell method toRugString (Cell方法toRugString)
-
+                // Utilize the Cell method toRugString
             }
         }
-
         return boardString.toString();
     }
-
 }

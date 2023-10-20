@@ -68,22 +68,23 @@
         //Calculate the amount of dirhams that can be afforded
         public int canAfford(int x) {
             if (this.dirhams >= x) {
-                this.dirhams -= x;  // Deduct the cost (扣除费用)
-                return x;  // Return the full paid amount (返回全额支付的金额)
+                this.dirhams -= x;  // Deduct the cost
+                return x;  // Return the full paid amount
             } else {
-                int actualPaidAmount = this.dirhams;  // Store the actual paid amount (保存实际支付的金额)
-                this.dirhams = 0;  // Clear the player's currency (清空玩家的货币)
-                return actualPaidAmount;  // Return the actual paid amount (返回实际支付的金额)
+                int actualPaidAmount = this.dirhams;  // Store the actual paid amount
+                this.dirhams = 0;  // Clear the player's currency
+                return actualPaidAmount;  // Return the actual paid amount
             }
         }
 
         // Add dirhams to the player's account
         public void addDirhams(int amount) {
-            // Check if the amount entered is a positive integer(判断输入的金额是否为正整数)
+            // Check if the amount entered is a positive integer
             if (amount >= 0) {
-                this.dirhams += amount;  // Increase the dirhams count (增加dirhams的数量)
+                this.dirhams += amount;  // Increase the dirhams count
             } else {
-                System.err.println("Invalid amount. Amount should be a positive integer.");  // // Output an error message for invalid input (输出错误信息)
+                System.err.println("Invalid amount. Amount should be a positive integer.");
+                // Output an error message for invalid input
             }
         }
 
@@ -129,9 +130,9 @@
                 int dirhams = Integer.parseInt(playerInfo.substring(2, 5));
                 int rugs = Integer.parseInt(playerInfo.substring(5, 7));
 
-                // 如果某个玩家的dirhams为0，则不考虑这个玩家的rugs数量
+                // If a player's dirhams is 0, the number of rugs for that player is not considered
                 if(dirhams > 0 && rugs > 0) {
-                    // 如果还有dirhams并且还有rugs未放置，说明游戏还未结束
+                    // If there are still dirhams and rugs that have not been placed, it indicates that the game has not ended yet
                     allRugsPlaced = false;
                     break;
                 }
@@ -149,7 +150,7 @@
             //this method is to accept a string argument 'state' which stores info of players.
             String[] playerInfo = new String[4];
             // the length of array is 4 for we assumed there are 4 players.
-            for (int i = 0; i < 4; i++) {  // 有4个玩家
+            for (int i = 0; i < 4; i++) {
                 String playerString = state.substring(i * 8, (i + 1) * 8);
                 //the length of char for each player is 8.
                 playerInfo[i] = playerString;
@@ -183,6 +184,6 @@
             //%03d: indicates the insertion of an integer after it, and requires at least 3 characters to represent it.
             // Integers less than 3 digits will be filled with zeros.
 
-            //isActive ? 'i' : 'o'：这是一个条件表达式，根据玩家的活动状态 (isActive) 决定插入字符 'i'（如果活跃）或 'o'（如果不活跃）。
+            //isActive ? 'i' : 'o'：This is a conditional expression that inserts the characters' i '(if active) or' o '(if inactive) based on the player's activity state (isActive).
         }
     }

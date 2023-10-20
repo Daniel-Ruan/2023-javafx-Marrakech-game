@@ -8,17 +8,17 @@ import javafx.scene.layout.VBox;
 import java.util.function.Consumer;
 
 public class GUISellectPlayerInterface extends Group {
-    private static final double WINDOW_WIDTH = 800;  // Window width, can adjust (根据您的窗口大小调整)
-    private static final double WINDOW_HEIGHT = 600;  // Window height(根据您的窗口大小调整)
+    private static final double WINDOW_WIDTH = 800;  // Window width, can adjust
+    private static final double WINDOW_HEIGHT = 600;  // Window height
 
     public GUISellectPlayerInterface(Consumer<Integer> onPlayerCountSelected) {
-        VBox vbox = new VBox(30);  // Container for holding buttons with spacing of 30 (用于存放按钮的容器，间距为30)
-        vbox.setAlignment(Pos.CENTER);  // Align the contents of the VBox to the center (将 VBox 内容居中)
+        VBox vbox = new VBox(30);  // Container for holding buttons with spacing of 30
+        vbox.setAlignment(Pos.CENTER);  // Align the contents of the VBox to the center
 
         for (int i = 2; i <= 4; i++) {
             int playerCount = i;
 
-            // Create a button and set its text, click event, and style (创建按钮并设置文本、点击事件和样式)
+            // Create a button and set its text, click event, and style
             Button button = new Button("Player number: " + playerCount);
             button.setStyle("-fx-font-size: 14pt; -fx-background-color: #2196c0; -fx-padding: 10 20 10 20;");
             button.setOnAction(event -> {

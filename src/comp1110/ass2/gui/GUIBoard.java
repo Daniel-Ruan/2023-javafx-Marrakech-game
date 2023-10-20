@@ -12,9 +12,9 @@ import javafx.scene.shape.Rectangle;
 
 public class GUIBoard extends Group {
 
-    public MarrakechGame game; // Reference to the game instance (游戏实例)
-    GUICell[][] guiCells; // Array to store GUICell instances (用于存储GUICell的数组)
-    public static final int CELL_SIZE = 73; // / Size of each cell 假设每个单元格的尺寸为50，你可以根据需要修改这个值
+    public MarrakechGame game; // Reference to the game instance
+    GUICell[][] guiCells; // Array to store GUICell instances
+    public static final int CELL_SIZE = 73; // / Size of each cell
     public static final int CELL_GAP = 0;// Gap between cells
     GUIAssam guiAssam;// Represents the Assam on the board
     int highLightDegree;// Degree of highlighting
@@ -23,16 +23,16 @@ public class GUIBoard extends Group {
     // Constructor for GUIBoard
     public GUIBoard(MarrakechGame game) {
         this.game = game;
-        // Create an ImagePattern object and load the game board image resource (创建一个ImagePattern对象并加载图片资源)
+        // Create an ImagePattern object and load the game board image resource
         ImagePattern imgPat = new ImagePattern(new Image("file:assets/gameBoard.png"));
 
-        // Create a Rectangle and set the size (创建一个Rectangle对象并设置它的尺寸)
+        // Create a Rectangle and set the size
         rect.setLayoutX(-50);
         rect.setLayoutY(-50);
-        // Fill the Rectangle with the ImagePattern (使用ImagePattern填充Rectangle)
+        // Fill the Rectangle with the ImagePattern
         rect.setFill(imgPat);
 
-        // Add the Rectangle to the GUIBoard (将Rectangle添加到GUIBoard中)
+        // Add the Rectangle to the GUIBoard
         this.getChildren().add(rect);
         // Initialize the board and add the Assam
         initializeBoard();
@@ -43,17 +43,17 @@ public class GUIBoard extends Group {
     }
     // Initialize the GUI board based on the game board
     private void initializeBoard() {
-        Board board = game.board; //Get the game board (从游戏实例中获取Board)
-        guiCells = new GUICell[Board.BOARD_SIZE][Board.BOARD_SIZE]; // Initialize the GUICell array (初始化GUICell数组)
+        Board board = game.board; //Get the game board
+        guiCells = new GUICell[Board.BOARD_SIZE][Board.BOARD_SIZE]; // Initialize the GUICell array
 
         for (int col = 0; col < Board.BOARD_SIZE; col++) {
             for (int row = 0; row < Board.BOARD_SIZE; row++) {
-                Cell cell = board.board[col][row]; // Get the Cell from the Board (从Board获取Cell)
-                GUICell guiCell = new GUICell(game, cell, CELL_SIZE, this); // Create a GUICell (创建GUICell)
-                guiCell.setLayoutX(col * (CELL_SIZE + CELL_GAP) + 48); // Set the GUICell's position (设置GUICell的位置)
+                Cell cell = board.board[col][row]; // Get the Cell from the Board
+                GUICell guiCell = new GUICell(game, cell, CELL_SIZE, this); // Create a GUICell
+                guiCell.setLayoutX(col * (CELL_SIZE + CELL_GAP) + 48); // Set the GUICell's position
                 guiCell.setLayoutY(row * (CELL_SIZE + CELL_GAP) + 47);
-                guiCells[col][row] = guiCell; // Store the GUICell in the array (将GUICell存储在数组中)
-                this.getChildren().add(guiCell); // Add the GUICell to the GUIBoard (将GUICell添加到GUIBoard)
+                guiCells[col][row] = guiCell; // Store the GUICell in the array
+                this.getChildren().add(guiCell); // Add the GUICell to the GUIBoard
             }
         }
     }
@@ -108,9 +108,9 @@ public class GUIBoard extends Group {
     }
     // Set the position to highlight
     void setHighLightPosition(IntPair pos) {
-        updateHighlightStatus(false); //Clear the current highlight (取消当前高亮)
+        updateHighlightStatus(false); //Clear the current highlight
         highLightPosition = pos;
-        updateHighlightStatus(true); // Apply the new highlight (应用新高亮)
+        updateHighlightStatus(true); // Apply the new highlight
     }
 
     void rotateHighLightDegree(int degree) {
@@ -120,9 +120,9 @@ public class GUIBoard extends Group {
     //可能有问题
 
     void setHighLightDegree(int degree) {
-        updateHighlightStatus(false); // Clear the current highlight (取消当前高亮)
+        updateHighlightStatus(false); // Clear the current highlight
         highLightDegree = degree;
-        updateHighlightStatus(true); // Apply the new highlight (应用新高亮)
+        updateHighlightStatus(true); // Apply the new highlight
 
     }
 
@@ -131,6 +131,4 @@ public class GUIBoard extends Group {
             guiCell.setHighLight(highlight);
         }
     }
-
-
 }

@@ -7,11 +7,6 @@ public class Tile {
 
     // Constructors, getters, and setters
 
-    /*public Tile() {
-        this.rug = null;
-        this.assam = null;
-    }*/
-
     public Rug getRug() {
         return rug;
     }

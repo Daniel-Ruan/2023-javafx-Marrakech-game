@@ -20,14 +20,14 @@ public class GUIMainGame extends Group {
 
         // Handle scrolling for rotating the view
         this.setOnScroll(event -> {
-            if (event.getDeltaY() > 0) { // Scroll Up (鼠标向前滚动)
+            if (event.getDeltaY() > 0) { // Scroll Up
                 if (game.phase == 0) {
                     game.assam.changeAngle(-90);
                     guiMarrakech.guiBoard.update();
                 } else if (game.phase == 2) {
                     guiMarrakech.guiBoard.rotateHighLightDegree(-90);
                 }
-            } else if (event.getDeltaY() < 0) { // Scroll Down (鼠标向后滚动)
+            } else if (event.getDeltaY() < 0) { // Scroll Down
                 if (game.phase == 0) {
                     game.assam.changeAngle(90);
                     guiMarrakech.guiBoard.update();
